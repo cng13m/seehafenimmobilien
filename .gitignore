@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.next/
+
+# Local browser QA artifacts
+qa-*.png
+edge-qa*/
+
+# Environment and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local agent metadata
+.agents/
