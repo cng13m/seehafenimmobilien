@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowDown, ArrowUpRight, ChevronRight, Menu, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Mail, MapPin, Menu, Phone, Ruler, X } from 'lucide-react';
 import './styles.css';
 
 const services = [
-  { n: '01', title: 'Immobilienverkauf', text: 'Von der fundierten Bewertung bis zum erfolgreichen Notartermin – persönlich, transparent und mit einer klaren Strategie.' },
-  { n: '02', title: 'Bewirtschaftung', text: 'Strukturierte Betreuung von Wohnliegenschaften für nachhaltigen Werterhalt und zufriedene Eigentümer und Mieter.' },
-  { n: '03', title: 'Beratung', text: 'Individuelle Entscheidungsgrundlagen für Eigentümer, Käufer und Investoren – unabhängig und auf Augenhöhe.' },
+  { title: 'Immobilienverkauf', image: '/assets/team-1.jpg', text: 'Wir begleiten Sie persönlich und professionell – von der Bewertung bis zum erfolgreichen Verkauf.' },
+  { title: 'Bewirtschaftung', image: '/assets/team-2.jpg', text: 'Zuverlässige Verwaltung Ihrer Liegenschaft. Transparent, effizient und immer mit Blick auf den Werterhalt.' },
+  { title: 'Beratung', image: '/assets/team-3.jpg', text: 'Ob Kauf, Verkauf oder Investition – wir beraten Sie kompetent, unabhängig und mit Weitblick.' },
 ];
 
-const references = [
-  { image: '/assets/property-1.jpg', place: 'Region Zürichsee', title: 'Wohnliegenschaft mit Weitblick', tag: 'Verkauft' },
-  { image: '/assets/property-2.jpg', place: 'Kanton Zürich', title: 'Modernes Wohnen im Grünen', tag: 'Vermittelt' },
-  { image: '/assets/property-3.jpg', place: 'Deutschschweiz', title: 'Ein Zuhause mit Charakter', tag: 'Referenz' },
+const properties = [
+  { title: 'Wohnliegenschaft mit Potenzial', location: 'Kanton Schwyz', type: 'Wohnimmobilie', area: 'Individuell', image: '/assets/property-1.jpg' },
+  { title: 'Immobilienwerte nachhaltig sichern', location: 'Deutschschweiz', type: 'Bewirtschaftung', area: 'Persönlich betreut', image: '/assets/property-2.jpg' },
 ];
 
-function Brand({ light = false }) {
-  return <a className={`brand ${light ? 'brand--light' : ''}`} href="#top" aria-label="Seehafen Startseite">
-    <span className="brand-mark"><i /><i /><i /></span>
-    <span><strong>SEEHAFEN</strong><small>& PARTNER IMMOBILIEN</small></span>
-  </a>;
+function Logo() {
+  return <a href="#top" className="logo" aria-label="Seehafen Immobilien Startseite"><img src="/assets/logo.png" alt="Seehafen & Partner Immobilien AG" /></a>;
 }
 
 function App() {
@@ -30,64 +26,74 @@ function App() {
     return () => window.removeEventListener('hashchange', close);
   }, []);
 
-  return <>
-    <header className="header">
-      <Brand />
-      <nav className={open ? 'nav nav--open' : 'nav'} aria-label="Hauptnavigation">
-        <a href="#unternehmen">Unternehmen</a><a href="#leistungen">Dienstleistungen</a><a href="#referenzen">Referenzen</a><a href="#kontakt">Kontakt</a>
-      </nav>
-      <a className="header-cta" href="mailto:info@seehafen-immobilien.ch">Beratung vereinbaren <ArrowUpRight size={17}/></a>
-      <button className="menu" onClick={() => setOpen(!open)} aria-label="Menü öffnen">{open ? <X/> : <Menu/>}</button>
+  return <div id="top">
+    <header className="site-header">
+      <div className="nav-shell">
+        <Logo />
+        <nav className={open ? 'main-nav is-open' : 'main-nav'} aria-label="Hauptnavigation">
+          <a href="#unternehmen">Firma <ChevronDown /></a>
+          <a href="#leistungen">Dienstleistungen <ChevronDown /></a>
+          <a href="#angebote">Angebote <ChevronDown /></a>
+          <a href="#referenzen">Referenzen</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+        <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label={open ? 'Menü schliessen' : 'Menü öffnen'}>{open ? <X /> : <Menu />}</button>
+      </div>
     </header>
 
-    <main id="top">
+    <main>
       <section className="hero">
-        <img className="hero-image" src="/assets/property-hero.jpg" alt="Moderne Schweizer Wohnimmobilie" />
-        <div className="hero-shade" />
-        <div className="hero-copy">
-          <p className="eyebrow light">Seehafen & Partner Immobilien AG</p>
-          <h1>Immobilien.<br/><em>Mit Weitblick.</em></h1>
-          <p className="hero-lead">Persönliche Beratung, verantwortungsvolle Entscheidungen und engagierte Begleitung – aus Überzeugung.</p>
-          <a className="circle-link" href="#leistungen" aria-label="Mehr entdecken"><ArrowDown /></a>
+        <img src="/assets/hero-original.jpg" alt="Moderne Immobilie mit Weitblick" />
+        <div className="hero-overlay" />
+        <div className="content hero-content">
+          <p>Persönlich. Verlässlich. Kompetent.</p>
+          <h1>Seehafen<br/>Immobilien</h1>
+          <h2>Ihr Partner für Immobilien mit Weitblick.</h2>
+          <a className="button button-solid" href="mailto:info@seehafen-immobilien.ch?subject=Kostenlose%20Immobilienbewertung">Kostenlose Bewertung <ArrowRight /></a>
         </div>
-        <div className="hero-note"><span>01</span><p>Langfristig.<br/>Persönlich.<br/>Verlässlich.</p></div>
       </section>
 
-      <section className="intro shell" id="unternehmen">
-        <div><p className="eyebrow">Unser Anspruch</p><span className="section-index">01 — 04</span></div>
+      <section className="intro content" id="unternehmen">
         <div className="intro-copy">
-          <h2>Eine Immobilie ist mehr als eine Transaktion. <em>Sie ist Vertrauenssache.</em></h2>
-          <p>Wir begleiten Sie sicher durch den gesamten Prozess – mit lokaler Expertise, einem persönlichen Ansprechpartner und dem Anspruch, für jede Immobilie die passende Lösung zu finden.</p>
-          <a className="text-link" href="#kontakt">Lernen Sie uns kennen <ArrowUpRight size={18}/></a>
+          <span className="kicker">Mit Herz und Verstand</span>
+          <h2>Für alles rund um<br/>Ihre Immobilie</h2>
+          <p>Kommen Sie zu Seehafen & Partner Immobilien und lassen Sie sich unverbindlich beraten. Wir freuen uns auf Sie!</p>
+        </div>
+        <div className="service-grid" id="leistungen">
+          {services.map((service) => <article className="service-card" key={service.title}>
+            <img src={service.image} alt="" />
+            <div><h3>{service.title}</h3><p>{service.text}</p><a href="#kontakt">Mehr erfahren <ArrowRight /></a></div>
+          </article>)}
         </div>
       </section>
 
-      <section className="services" id="leistungen">
-        <div className="shell section-head"><div><p className="eyebrow light">Was wir für Sie tun</p><h2>Alles rund um<br/><em>Ihre Immobilie.</em></h2></div><p>Kompetenz, die sich an Ihren Zielen orientiert – nicht an Standardlösungen.</p></div>
-        <div className="service-list shell">
-          {services.map((s) => <article key={s.n}><span>{s.n}</span><h3>{s.title}</h3><p>{s.text}</p><a href="#kontakt" aria-label={`${s.title} anfragen`}><ArrowUpRight/></a></article>)}
+      <section className="offers" id="angebote">
+        <div className="content">
+          <div className="section-heading"><div><span className="kicker">Immobilien & Referenzen</span><h2>Unsere Immobilienkompetenz</h2></div><a href="https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag" target="_blank" rel="noreferrer">Alle Angebote <ArrowRight /></a></div>
+          <div className="property-grid" id="referenzen">
+            {properties.map((property) => <article className="property" key={property.title}>
+              <img src={property.image} alt={property.title} />
+              <div className="property-info"><h3>{property.title}</h3><p><MapPin /> {property.location}</p><p><span className="building-icon">⌂</span> {property.type}</p><p><Ruler /> {property.area}</p><a href="mailto:info@seehafen-immobilien.ch?subject=Immobilienanfrage">Details anfragen <ArrowRight /></a></div>
+            </article>)}
+          </div>
+          <div className="slider-arrows"><button aria-label="Zurück"><ArrowLeft /></button><button aria-label="Weiter"><ArrowRight /></button></div>
         </div>
       </section>
 
-      <section className="process shell">
-        <div className="process-image"><img src="/assets/about.jpg" alt="Persönliche Immobilienberatung"/><span>Persönlich<br/>für Sie da.</span></div>
-        <div className="process-copy"><p className="eyebrow">So arbeiten wir</p><h2>Klarer Prozess.<br/><em>Gutes Gefühl.</em></h2>
-          {['Erstgespräch & Zielklärung','Analyse & Strategie','Professionelle Umsetzung','Langfristige Partnerschaft'].map((x,i)=><div className="step" key={x}><span>0{i+1}</span><p>{x}</p><ChevronRight/></div>)}
-        </div>
-      </section>
-
-      <section className="work" id="referenzen">
-        <div className="shell work-head"><div><p className="eyebrow">Ausgewählte Referenzen</p><h2>Erfolgreich<br/><em>vermittelt.</em></h2></div><p>Jede Immobilie verdient eine eigene Geschichte, eine klare Positionierung und die richtige Käuferschaft.</p></div>
-        <div className="cards shell">{references.map((r,i)=><article className="card" key={r.title}><div className="card-image"><img src={r.image} alt={r.title}/><span>{r.tag}</span><a href="#kontakt" aria-label="Referenz anfragen"><ArrowUpRight/></a></div><small>{r.place}</small><h3>{r.title}</h3><p>0{i+1} / 03</p></article>)}</div>
-      </section>
-
-      <section className="contact" id="kontakt">
-        <div className="shell contact-inner"><p className="eyebrow light">Der erste Schritt</p><h2>Lassen Sie uns über<br/><em>Ihre Immobilie sprechen.</em></h2><p>Vereinbaren Sie ein unverbindliches Erstgespräch. Wir freuen uns, Sie kennenzulernen.</p><a className="contact-link" href="mailto:info@seehafen-immobilien.ch">info@seehafen-immobilien.ch <ArrowUpRight/></a></div>
+      <section className="contact-strip" id="kontakt">
+        <div className="content"><div><span className="kicker">Wir sind für Sie da</span><h2>Lassen Sie uns über Ihre Immobilie sprechen.</h2></div><a className="button button-light" href="mailto:info@seehafen-immobilien.ch">Kontakt aufnehmen <ArrowRight /></a></div>
       </section>
     </main>
 
-    <footer><div className="shell footer-grid"><Brand light/><div><small>Navigation</small><a href="#unternehmen">Unternehmen</a><a href="#leistungen">Dienstleistungen</a><a href="#referenzen">Referenzen</a></div><div><small>Kontakt</small><a href="mailto:info@seehafen-immobilien.ch">E-Mail schreiben</a><a href="https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag">Aktuelle Immobilien</a></div></div><div className="shell footer-bottom"><span>© 2026 Seehafen & Partner Immobilien AG</span><span>Impressum · Datenschutz</span></div></footer>
-  </>;
+    <footer className="footer">
+      <div className="content footer-main">
+        <div><strong>Hauptsitz Schwyz</strong><p>Seehafen & Partner Immobilien AG<br/>Bahnhofstrasse 4<br/>6430 Schwyz</p></div>
+        <div><strong>Filiale Wohlen</strong><p>Cheiblerrain 13<br/>5610 Wohlen</p></div>
+        <div className="footer-contact"><a href="tel:+41444514302"><Phone /> +41 44 451 43 02</a><a href="tel:+41797857880"><Phone /> +41 79 785 78 80</a><a href="mailto:info@seehafen-immobilien.ch"><Mail /> info@seehafen-immobilien.ch</a></div>
+      </div>
+      <div className="content footer-bottom"><span>© 2026 Seehafen & Partner Immobilien AG. Alle Rechte vorbehalten.</span><span><a href="https://seehafen-immobilien.ch/impressum/">Impressum</a><i/> <a href="https://seehafen-immobilien.ch/datenschutzrichtlinie/">Datenschutz</a></span></div>
+    </footer>
+  </div>;
 }
 
 createRoot(document.getElementById('root')).render(<App />);

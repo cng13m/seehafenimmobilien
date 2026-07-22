@@ -5,6 +5,7 @@ dist/
 # Local browser QA artifacts
 qa-*.png
 edge-qa*/
+Refference.png
 
 # Environment and editor files
 .env
