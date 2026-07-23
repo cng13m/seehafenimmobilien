@@ -108,6 +108,23 @@
 .team-grid h3{font-size:22px;margin-bottom:8px}
 .team-grid strong{font-size:14px}
 .team-grid p{max-width:310px;margin-top:15px}
+.company-story{padding:94px 0 108px;background:#fff}
+.company-story-grid{display:grid;grid-template-columns:1fr 1fr;gap:92px}
+.company-story h2{font-size:34px;line-height:1.2;letter-spacing:-.025em;margin:0;max-width:500px}
+.company-story-grid>div:last-child{max-width:560px}
+.company-story p{font-size:16px;line-height:1.75;color:var(--muted);margin:0 0 16px}
+.team-page{padding:112px 0 120px;background:#fff}
+.team-page-heading{max-width:620px;margin-bottom:88px}
+.team-page-heading h1{font-size:46px;line-height:1.08;letter-spacing:-.035em;margin:0 0 18px}
+.team-page-heading p{font-size:17px;line-height:1.65;color:var(--muted);margin:0}
+.work-method{padding:98px 0 110px;background:#e9ebe9}
+.work-method-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:92px}
+.work-method h2{font-size:34px;line-height:1.2;letter-spacing:-.025em;margin:0}
+.work-method-steps{border-top:1px solid #c9cfca}
+.work-method-steps article{display:grid;grid-template-columns:44px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid #c9cfca}
+.work-method-steps article>span{font-size:12px;font-weight:700;color:var(--green)}
+.work-method-steps h3{font-size:18px;margin:0 0 6px}
+.work-method-steps p{font-size:14px;line-height:1.55;color:var(--muted);margin:0}
 .overview-links{padding:92px 0 104px;background:#e9ebe9}
 .overview-link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
 .overview-link-card{background:#fff;display:flex;flex-direction:column;min-height:430px}
@@ -180,6 +197,7 @@
   .page-hero-copy{gap:40px}
   .secondary-service-grid article{grid-template-columns:160px 1fr}
   .team-grid{gap:28px}
+  .company-story-grid,.work-method-grid{gap:48px}
   .service-detail-grid{gap:48px}
   .reference-archive{padding-top:78px}
   .reference-archive-intro{margin-bottom:72px}
@@ -218,6 +236,11 @@
   .service-detail-grid h2{font-size:28px}
   .service-detail-visual>img{height:230px}
   .secondary-services,.values-section,.team-section{padding:62px 0}
+  .company-story,.team-page,.work-method{padding:62px 0 74px}
+  .company-story-grid,.work-method-grid{grid-template-columns:1fr;gap:38px}
+  .company-story h2,.work-method h2{font-size:28px}
+  .team-page-heading{margin-bottom:58px}
+  .team-page-heading h1{font-size:36px}
   .secondary-service-grid{grid-template-columns:1fr;gap:20px}
   .secondary-service-grid article{grid-template-columns:1fr}
   .secondary-service-grid article>img{height:210px}
