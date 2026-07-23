@@ -1,9 +1,17 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "seehafenimmobilien",
+  "main": "./src/worker.js",
   "compatibility_date": "2026-07-23",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
-  }
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "info@seehafen-immobilien.ch"
+    }
+  ]
 }
