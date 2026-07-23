@@ -71,15 +71,35 @@
 .page-hero h1{font-size:46px;line-height:1.08;max-width:620px;color:var(--ink)}
 .page-hero p{font-size:17px;line-height:1.7;max-width:560px;margin:26px 0 0;color:var(--muted)}
 
-.services-page{padding:84px 0;background:#e9ebe9}
-.service-grid.detailed{grid-template-columns:repeat(2,1fr);gap:32px}
-.service-grid.detailed .service-card{min-height:0;background:#fff;color:var(--ink);scroll-margin-top:150px}
-.service-grid.detailed .service-card>img{height:260px}
-.service-grid.detailed .service-card>div{padding:30px}
-.service-grid.detailed .service-card h3{font-size:22px}
-.service-grid.detailed .service-card p{color:var(--muted)}
-.service-grid.detailed .service-card ul{border-top-color:var(--line)}
-.service-grid.detailed .service-card li{border-bottom-color:var(--line);color:#414944;padding:10px 0}
+.services-page{padding:84px 0 104px;background:#fff}
+.service-grid.detailed{grid-template-columns:repeat(4,1fr);gap:32px}
+.service-grid.detailed .service-card{min-height:390px;background:var(--green);color:#fff;scroll-margin-top:150px}
+.service-grid.detailed .service-card>img{height:185px}
+.service-grid.detailed .service-card>div{min-height:205px;padding:25px 23px 22px;display:flex;flex-direction:column}
+.service-grid.detailed .service-card h3{font-size:21px;line-height:1.3;margin:0}
+.service-grid.detailed .service-card a{margin-top:auto;justify-content:space-between;color:#fff}
+.simple-heading{max-width:520px;margin-bottom:38px}
+.simple-heading h2{font-size:31px;line-height:1.2;letter-spacing:-.025em;margin:0}
+.secondary-services{padding:92px 0 102px;background:#e9ebe9}
+.secondary-service-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.secondary-service-grid article{background:#fff;display:grid;grid-template-columns:210px 1fr;min-height:220px;scroll-margin-top:150px}
+.secondary-service-grid article>img{height:100%}
+.secondary-service-grid article>div{padding:28px;display:flex;flex-direction:column}
+.secondary-service-grid h3{font-size:21px;line-height:1.3;margin:0 0 12px}
+.secondary-service-grid p{font-size:14px;line-height:1.6;color:var(--muted);margin:0}
+.secondary-service-grid a{display:flex;align-items:center;justify-content:space-between;margin-top:auto;color:var(--green);font-weight:700}
+.secondary-service-grid a svg{width:17px}
+.values-section{padding:90px 0 102px;background:#fff}
+.values-section .values{margin-top:0}
+.values-section .values div{padding:30px 28px}
+.team-section{padding:102px 0}
+.team-section .section-heading{margin-bottom:52px}
+.team-grid{gap:58px}
+.team-grid article{border:0;border-top:1px solid var(--green);padding:29px 0 0}
+.team-grid article>span{width:72px;height:72px;margin-bottom:28px;font-size:17px}
+.team-grid h3{font-size:22px;margin-bottom:8px}
+.team-grid strong{font-size:14px}
+.team-grid p{max-width:310px;margin-top:15px}
 #team,#werte{scroll-margin-top:150px}
 .footer{background:var(--green)}
 
@@ -109,6 +129,7 @@
 @media(max-width:1100px){
   .main-nav{gap:25px;font-size:14px}
   .logo{width:200px}
+  .service-grid.detailed{grid-template-columns:repeat(2,1fr)}
   .reference-archive-grid{grid-template-columns:repeat(3,1fr)}
 }
 
@@ -130,6 +151,8 @@
   .hero-content{padding-bottom:112px}
   .page-hero-media{width:100%;height:440px}
   .page-hero-copy{gap:40px}
+  .secondary-service-grid article{grid-template-columns:160px 1fr}
+  .team-grid{gap:28px}
   .reference-archive{padding-top:78px}
   .reference-archive-intro{margin-bottom:72px}
   .reference-archive-grid{grid-template-columns:repeat(2,1fr);gap:24px}
@@ -157,6 +180,13 @@
   .service-grid.detailed{grid-template-columns:1fr}
   .service-grid.detailed .service-card{display:block}
   .service-grid.detailed .service-card>img{height:220px}
+  .service-grid.detailed .service-card>div{min-height:180px}
+  .secondary-services,.values-section,.team-section{padding:62px 0}
+  .secondary-service-grid{grid-template-columns:1fr;gap:20px}
+  .secondary-service-grid article{grid-template-columns:1fr}
+  .secondary-service-grid article>img{height:210px}
+  .secondary-service-grid article>div{min-height:210px;padding:24px}
+  .team-grid{gap:44px}
   .reference-archive{padding:58px 0}
   .reference-archive-intro{margin-bottom:52px}
   .reference-archive-intro h1{font-size:36px}
