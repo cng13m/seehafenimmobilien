@@ -1,133 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowLeft, ArrowRight, ChevronDown, Mail, MapPin, Menu, Phone, Ruler, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, Mail, MapPin, Menu, Phone, Ruler, X } from 'lucide-react';
 import './styles.css';
 
 const services = [
-  { title: 'Bewirtschaftung & Verwaltung', image: '/assets/team-2.jpg', text: 'Mietverwaltung, Stockwerkeigentum, technischer Unterhalt, Nebenkostenabrechnungen und strukturiertes Reporting.' },
-  { title: 'Vermarktung & Verkauf', image: '/assets/team-1.jpg', text: 'Verkauf von Wohnungen, Häusern und Renditeobjekten – inklusive Exposé, Marketing, Besichtigungen und Abwicklung.' },
-  { title: 'Immobilienberatung', image: '/assets/team-3.jpg', text: 'Marktwert-, Potenzial- und Portfolioanalysen sowie individuelle Strategien für Kauf, Finanzierung und Entwicklung.' },
-  { title: 'Erstvermietung & Neubau', image: '/assets/property-1.jpg', text: 'Markt- und Standortanalysen, Mietpreisgestaltung, Vermarktung, Vertragsabschlüsse und Mieterkoordination.' },
-  { title: 'Baumanagement & Unterhalt', image: '/assets/property-2.jpg', text: 'Sanierungsplanung, Offertvergleiche, Koordination von Umbauten sowie Termin-, Kosten- und Qualitätskontrolle.' },
-  { title: 'Immobilieninvestments', image: '/assets/property-3.jpg', text: 'Investitionsberatung, Off-Market-Deals und persönliche Begleitung bei An- und Verkaufsprozessen.' },
+  ['Bewirtschaftung & Verwaltung','/assets/team-2.jpg','Mietverwaltung von Wohn- und Gewerbeobjekten, Stockwerkeigentum, technischer Unterhalt, Inkasso, Nebenkostenabrechnungen und Reporting.',['Mietverwaltung von Wohn- und Gewerbeobjekten','Verwaltung von Stockwerkeigentum (STWE)','Technische Bewirtschaftung und Unterhalt','Mietzinsinkasso und Mahnwesen','Nebenkostenabrechnungen','Objektkontrollen und Reporting']],
+  ['Vermarktung & Verkauf','/assets/team-1.jpg','Professioneller Verkauf von Wohnungen, Häusern und Renditeobjekten – persönlich begleitet bis zum erfolgreichen Abschluss.',['Hochwertige Exposés','Online-Marketing und Immobilienportale','Besichtigungen und Interessentenmanagement','Verkaufsverhandlungen','Vertragsabwicklung','Marktwertschätzungen']],
+  ['Immobilienberatung','/assets/team-3.jpg','Fundierte Entscheidungsgrundlagen und individuelle Strategien für Eigentümer, Käufer und Investoren.',['Marktwert- und Potenzialanalysen','Portfolioanalysen','Liegenschaftsstrategien','Kaufberatung','Unterstützung bei Finanzierungen']],
+  ['Erstvermietung & Neubau','/assets/property-1.jpg','Von der Marktanalyse bis zur Übergabe: eine klare Positionierung und koordinierte Erstvermietung.',['Markt- und Standortanalysen','Mietpreisgestaltung','Branding- und Marketingkonzepte','Besichtigungen und Vertragsabschlüsse','Übergaben und Mieterkoordination']],
+  ['Baumanagement & Unterhalt','/assets/property-2.jpg','Strukturierte Planung und Kontrolle für Sanierungen, Unterhalt und Umbauten.',['Sanierungs- und Unterhaltsplanung','Koordination von Umbauten','Offertvergleich und Vergabe','Termin- und Kostenkontrolle','Abnahmen und Qualitätskontrollen']],
+  ['Immobilieninvestments','/assets/property-3.jpg','Persönliche Begleitung bei Investitionsentscheiden sowie An- und Verkaufsprozessen.',['Investitionsberatung','Off-Market-Deals','Begleitung bei An- und Verkaufsprozessen','Administrative und rechtliche Unterstützung']],
 ];
 
 const references = [
-  { title: 'Mehrfamilienhaus Hägglingen', location: 'Hägglingen AG', type: 'Verkauft', detail: '6 Wohnungen', image: '/assets/property-1.jpg' },
-  { title: 'Wohnportfolio in Olten', location: 'Olten SO', type: 'Verkauft', detail: '24 Wohnungen', image: '/assets/property-2.jpg' },
-  { title: 'Attika-Maisonette-Terrassenhaus', location: 'Rieden SG', type: 'Vermietet', detail: '5.5 Zimmer', image: '/assets/property-3.jpg' },
-  { title: 'Wohn- und Gewerbeliegenschaft', location: 'Schaffhausen', type: 'Verwaltungsmandat', detail: '16 Wohnungen · 2 Gewerbe', image: '/assets/team-1.jpg' },
+  ['Mehrfamilienhaus Hägglingen','Hägglingen AG','Verkauft','6 Wohnungen','/assets/property-1.jpg'],
+  ['Wohnportfolio in Olten','Olten SO','Verkauft','24 Wohnungen','/assets/property-2.jpg'],
+  ['3.5-Zimmer-Wohnung','Zürich ZH','Verkauft','Wohnung','/assets/property-3.jpg'],
+  ['Attika-Maisonette-Terrassenhaus','Rieden SG','Vermietet','5.5 Zimmer','/assets/team-3.jpg'],
+  ['Wohnungen in Wohlen','Wohlen AG','Vermietet','2.5 & 3.5 Zimmer','/assets/team-2.jpg'],
+  ['Wohn- und Gewerbeliegenschaft','Schaffhausen','Verwaltungsmandat','16 Wohnungen · 2 Gewerbe','/assets/team-1.jpg'],
 ];
 
-const process = [
-  ['01', 'Erstgespräch', 'Wir besprechen Ihre Ziele, Anforderungen und Erwartungen persönlich.'],
-  ['02', 'Analyse', 'Wir analysieren Ihre Immobilie und entwickeln eine massgeschneiderte Strategie.'],
-  ['03', 'Umsetzung', 'Wir setzen die vereinbarten Massnahmen professionell und transparent um.'],
-  ['04', 'Partnerschaft', 'Wir begleiten Sie langfristig als verlässlicher Immobilienpartner.'],
-];
+const process = [['01','Erstgespräch','Wir besprechen Ihre Ziele, Anforderungen und Erwartungen persönlich.'],['02','Analyse','Wir analysieren Ihre Immobilie und entwickeln eine massgeschneiderte Strategie.'],['03','Umsetzung','Wir setzen die vereinbarten Massnahmen professionell und transparent um.'],['04','Partnerschaft','Wir begleiten Sie langfristig als verlässlicher Immobilienpartner.']];
+const team = [['EL','Eduard Laska','Geschäftsführer','Über 10 Jahre Erfahrung in der Immobilienbranche · Eidg. Fachausweis'],['DL','Dorentina Laska','Sachbearbeiterin Immobilien','Persönliche und zuverlässige Betreuung unserer Kundschaft'],['JM','Jozefina Markaj','Vermarktung','Dipl. Innenarchitektin · Immobilien wirkungsvoll positioniert']];
 
-const team = [
-  ['Eduard Laska', 'Geschäftsführer', 'Über 10 Jahre Erfahrung in der Immobilienbranche · Eidg. Fachausweis'],
-  ['Dorentina Laska', 'Sachbearbeiterin Immobilien', 'Persönliche und zuverlässige Betreuung unserer Kundschaft'],
-  ['Jozefina Markaj', 'Vermarktung', 'Dipl. Innenarchitektin · Immobilien wirkungsvoll positioniert'],
-];
+function Logo(){return <a href="/" className="logo" aria-label="Startseite"><img src="/assets/logo.png" alt="Seehafen & Partner Immobilien AG"/></a>}
+function Header(){const [open,setOpen]=useState(false);return <header className="site-header"><div className="nav-shell"><Logo/><nav className={open?'main-nav is-open':'main-nav'}><a href="/uber-uns">Firma <ChevronDown/></a><a href="/dienstleistungen">Dienstleistungen <ChevronDown/></a><a href="/referenzen">Referenzen</a><a href="/kontakt">Kontakt</a></nav><button className="nav-toggle" onClick={()=>setOpen(!open)} aria-label="Menü">{open?<X/>:<Menu/>}</button></div></header>}
+function Footer(){return <footer className="footer"><div className="content footer-main"><div><strong>Hauptsitz Schwyz</strong><p>Seehafen & Partner Immobilien AG<br/>Bahnhofstrasse 4<br/>6430 Schwyz</p></div><div><strong>Filiale Wohlen</strong><p>Cheiblerrain 13<br/>5610 Wohlen</p></div><div className="footer-contact"><a href="tel:+41444514302"><Phone/> +41 44 451 43 02</a><a href="tel:+41797857880"><Phone/> +41 79 785 78 80</a><a href="mailto:info@seehafen-immobilien.ch"><Mail/> info@seehafen-immobilien.ch</a></div></div><div className="content footer-bottom"><span>© 2026 Seehafen & Partner Immobilien AG.</span><span><a href="https://seehafen-immobilien.ch/impressum/">Impressum</a><i/><a href="https://seehafen-immobilien.ch/datenschutzrichtlinie/">Datenschutz</a></span></div></footer>}
+function CTA(){return <section className="contact-strip"><div className="content"><div><span className="kicker">Kostenloses Erstgespräch</span><h2>Lassen Sie uns über Ihre Immobilie sprechen.</h2><p>Montag bis Freitag · 08:00–12:00 und 13:30–17:00 Uhr</p></div><a className="button button-light" href="/kontakt">Kontakt aufnehmen <ArrowRight/></a></div></section>}
+function PageHero({label,title,text}){return <section className="page-hero"><div className="content"><span className="kicker">{label}</span><h1>{title}</h1><p>{text}</p></div></section>}
+function ServiceCard({service,compact=false}){const [title,image,text,list]=service;return <article className={`service-card ${compact?'compact':''}`}><img src={image} alt=""/><div><h3>{title}</h3><p>{text}</p>{compact?<a href="/dienstleistungen">Mehr erfahren <ArrowRight/></a>:<ul>{list.map(x=><li key={x}>{x}</li>)}</ul>}</div></article>}
+function ReferenceCard({item}){const [title,location,type,detail,image]=item;return <article className="property"><img src={image} alt={title}/><div className="property-info"><h3>{title}</h3><p><MapPin/> {location}</p><p><span className="building-icon">⌂</span> {type}</p><p><Ruler/> {detail}</p><a href="mailto:info@seehafen-immobilien.ch?subject=Immobilienanfrage">Projekt anfragen <ArrowRight/></a></div></article>}
 
-function Logo() {
-  return <a href="#top" className="logo" aria-label="Seehafen Immobilien Startseite"><img src="/assets/logo.png" alt="Seehafen & Partner Immobilien AG" /></a>;
-}
+function Home(){return <><section className="hero"><img src="/assets/hero-original.jpg" alt="Moderne Immobilie mit Weitblick"/><div className="hero-overlay"/><div className="content hero-content"><p>Langfristig. Persönlich. Verlässlich.</p><h1>Seehafen<br/>Immobilien</h1><h2>Beratung, Verkauf und Bewirtschaftung mit Weitblick.</h2><a className="button button-solid" href="/kontakt">Kostenlose Bewertung <ArrowRight/></a></div></section><section className="home-intro content"><div><span className="kicker">Ihr vertrauenswürdiger Immobilienpartner</span><h2>Werte sichern.<br/>Beziehungen aufbauen.</h2><p>Wir betreuen Immobilien mit Engagement, Fachwissen und Weitblick – persönlich, transparent und nachhaltig.</p><a className="text-link" href="/uber-uns">Mehr über uns <ArrowRight/></a></div><div className="service-grid home-services">{services.slice(0,3).map(s=><ServiceCard key={s[0]} service={s} compact/>)}</div></section><section className="offers"><div className="content"><div className="section-heading"><div><span className="kicker">Erfolgreich begleitet</span><h2>Ausgewählte Referenzen</h2></div><a href="/referenzen">Alle Referenzen <ArrowRight/></a></div><div className="property-grid">{references.slice(0,2).map(x=><ReferenceCard key={x[0]} item={x}/>)}</div></div></section><CTA/></>}
+function About(){return <><PageHero label="Über uns" title="Drei Persönlichkeiten. Eine gemeinsame Leidenschaft." text="Wir betreuen Immobilien mit Engagement, Fachwissen und Weitblick. Unsere Vielfalt ist unsere Stärke – für persönliche, effiziente und nachhaltige Lösungen."/><section className="about-section"><div className="content about-grid"><div><span className="kicker">Unsere Philosophie</span><h2>Ihr vertrauenswürdiger Immobilienpartner</h2></div><div className="about-text"><p>Seehafen & Partner Immobilien AG steht für Verlässlichkeit, Diskretion und fachliche Kompetenz. Als unabhängiges Unternehmen handeln wir stets im Interesse unserer Kundinnen und Kunden.</p><p>Wir verwalten und vermitteln nicht nur Immobilien – wir sichern und entwickeln Werte nachhaltig weiter.</p></div><div className="values"><div><strong>Integrität</strong><span>Ehrlichkeit, Verlässlichkeit und Transparenz.</span></div><div><strong>Qualitätsanspruch</strong><span>Strukturierte Abläufe und hohe fachliche Standards.</span></div><div><strong>Nachhaltigkeit</strong><span>Langfristiger Werterhalt für Mensch und Immobilie.</span></div></div></div></section><section className="team-section"><div className="content"><div className="section-heading"><div><span className="kicker">Persönlich für Sie da</span><h2>Unser Team</h2></div><p>Erfahrung, Kompetenz und ein hohes Mass an persönlichem Engagement.</p></div><div className="team-grid">{team.map(([initials,name,role,bio])=><article key={name}><span>{initials}</span><h3>{name}</h3><strong>{role}</strong><p>{bio}</p></article>)}</div></div></section><CTA/></>}
+function Services(){return <><PageHero label="Unsere Expertise" title="Umfassende Immobiliendienstleistungen" text="Für Eigentümer, Investoren und Mieter in der Schweiz – mit Marktverständnis und einem klaren Anspruch an Qualität und Nachhaltigkeit."/><section className="services-page"><div className="content service-grid detailed">{services.map(s=><ServiceCard key={s[0]} service={s}/>)}</div></section><section className="process-section"><div className="content"><div className="section-heading"><div><span className="kicker">Unser Prozess</span><h2>So arbeiten wir</h2></div><p>Strukturiert, transparent und immer in Ihrem Interesse.</p></div><div className="process-grid">{process.map(([n,t,p])=><article key={n}><span>{n}</span><h3>{t}</h3><p>{p}</p></article>)}</div></div></section><CTA/></>}
+function References(){return <><PageHero label="Referenzen" title="Erfolgreiche Projekte. Nachhaltige Werte." text="Eine Auswahl erfolgreich verkaufter, vermieteter und verwalteter Immobilien – sorgfältig begleitet und individuell auf Objekt und Markt abgestimmt."/><section className="offers references-page"><div className="content"><div className="section-heading"><div><span className="kicker">Verkauf · Vermietung · Verwaltung</span><h2>Unsere Referenzen</h2></div></div><div className="property-grid">{references.map(x=><ReferenceCard key={x[0]} item={x}/>)}</div><div className="mandates"><h2>Weitere Verwaltungsmandate</h2><p>6 Wohnungen in Bubendorf · 8 Wohnungen in Staad · 6 Wohnungen in Hägglingen · 12 Wohnungen in Rheineck · 8 Wohnungen in Glarus</p></div></div></section><CTA/></>}
+function Contact(){return <><PageHero label="Kontakt" title="Nehmen Sie Kontakt auf" text="Haben Sie Fragen oder möchten Sie eine Beratung? Vereinbaren Sie ein kostenloses Erstgespräch – wir freuen uns auf Sie."/><section className="contact-page"><div className="content contact-grid"><div className="contact-card"><span className="kicker">Hauptsitz</span><h2>Schwyz</h2><p>Seehafen & Partner Immobilien AG<br/>Bahnhofstrasse 4<br/>6430 Schwyz</p></div><div className="contact-card"><span className="kicker">Filiale</span><h2>Wohlen</h2><p>Seehafen & Partner Immobilien AG<br/>Cheiblerrain 13<br/>5610 Wohlen</p></div><div className="contact-card contact-direct"><span className="kicker">Direkter Kontakt</span><a href="tel:+41444514302"><Phone/> +41 44 451 43 02</a><a href="tel:+41797857880"><Phone/> +41 79 785 78 80</a><a href="mailto:info@seehafen-immobilien.ch"><Mail/> info@seehafen-immobilien.ch</a><p><strong>Öffnungszeiten</strong><br/>Montag bis Freitag<br/>08:00–12:00 · 13:30–17:00 Uhr</p></div></div></section></>}
 
-function App() {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const close = () => setOpen(false);
-    window.addEventListener('hashchange', close);
-    return () => window.removeEventListener('hashchange', close);
-  }, []);
-
-  return <div id="top">
-    <header className="site-header">
-      <div className="nav-shell">
-        <Logo />
-        <nav className={open ? 'main-nav is-open' : 'main-nav'} aria-label="Hauptnavigation">
-          <a href="#unternehmen">Firma <ChevronDown /></a>
-          <a href="#leistungen">Dienstleistungen <ChevronDown /></a>
-          <a href="#angebote">Angebote <ChevronDown /></a>
-          <a href="#referenzen">Referenzen</a>
-          <a href="#kontakt">Kontakt</a>
-        </nav>
-        <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label={open ? 'Menü schliessen' : 'Menü öffnen'}>{open ? <X /> : <Menu />}</button>
-      </div>
-    </header>
-
-    <main>
-      <section className="hero">
-        <img src="/assets/hero-original.jpg" alt="Moderne Immobilie mit Weitblick" />
-        <div className="hero-overlay" />
-        <div className="content hero-content">
-          <p>Langfristig. Persönlich. Verlässlich.</p>
-          <h1>Seehafen<br/>Immobilien</h1>
-          <h2>Beratung, Verkauf und Bewirtschaftung mit Weitblick.</h2>
-          <a className="button button-solid" href="mailto:info@seehafen-immobilien.ch?subject=Kostenlose%20Immobilienbewertung">Kostenlose Bewertung <ArrowRight /></a>
-        </div>
-      </section>
-
-      <section className="intro content" id="unternehmen">
-        <div className="intro-copy">
-          <span className="kicker">Ihr vertrauenswürdiger Immobilienpartner</span>
-          <h2>Werte sichern.<br/>Beziehungen aufbauen.</h2>
-          <p>Seehafen & Partner steht für Verlässlichkeit, Diskretion und fachliche Kompetenz. Wir betreuen Immobilien mit Engagement, Fachwissen und Weitblick – persönlich, transparent und nachhaltig.</p>
-        </div>
-        <div className="service-grid" id="leistungen">
-          {services.map((service) => <article className="service-card" key={service.title}>
-            <img src={service.image} alt="" />
-            <div><h3>{service.title}</h3><p>{service.text}</p><a href="#kontakt">Mehr erfahren <ArrowRight /></a></div>
-          </article>)}
-        </div>
-      </section>
-
-      <section className="about-section" aria-labelledby="about-title">
-        <div className="content about-grid">
-          <div><span className="kicker">Unsere Philosophie</span><h2 id="about-title">Drei Persönlichkeiten.<br/>Eine gemeinsame Leidenschaft.</h2></div>
-          <div className="about-text"><p>Der Verkauf oder die Bewirtschaftung einer Liegenschaft ist mehr als eine Transaktion. Es ist eine verantwortungsvolle Entscheidung, die Weitblick, Fingerspitzengefühl und volle Aufmerksamkeit verdient.</p><p>Deshalb entwickeln wir individuelle Strategien statt Standardlösungen – professionell, transparent und mit Herzblut.</p></div>
-          <div className="values"><div><strong>Integrität</strong><span>Ehrlichkeit, Verlässlichkeit und Transparenz.</span></div><div><strong>Qualitätsanspruch</strong><span>Strukturierte Abläufe und hohe fachliche Standards.</span></div><div><strong>Nachhaltigkeit</strong><span>Langfristiger Werterhalt für Mensch und Immobilie.</span></div></div>
-        </div>
-      </section>
-
-      <section className="process-section">
-        <div className="content"><div className="section-heading"><div><span className="kicker">Unser Prozess</span><h2>So arbeiten wir</h2></div><p>Strukturiert, transparent und immer in Ihrem Interesse.</p></div><div className="process-grid">{process.map(([number,title,text])=><article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div>
-      </section>
-
-      <section className="offers" id="angebote">
-        <div className="content">
-          <div className="section-heading"><div><span className="kicker">Erfolgreich verkauft, vermietet & verwaltet</span><h2>Ausgewählte Referenzen</h2></div><a href="https://seehafen-immobilien.ch/referenzen/" target="_blank" rel="noreferrer">Alle Referenzen <ArrowRight /></a></div>
-          <div className="property-grid" id="referenzen">
-            {references.map((property) => <article className="property" key={property.title}>
-              <img src={property.image} alt={property.title} />
-              <div className="property-info"><h3>{property.title}</h3><p><MapPin /> {property.location}</p><p><span className="building-icon">⌂</span> {property.type}</p><p><Ruler /> {property.detail}</p><a href="mailto:info@seehafen-immobilien.ch?subject=Immobilienanfrage">Projekt anfragen <ArrowRight /></a></div>
-            </article>)}
-          </div>
-          <div className="slider-arrows"><button aria-label="Zurück"><ArrowLeft /></button><button aria-label="Weiter"><ArrowRight /></button></div>
-        </div>
-      </section>
-
-      <section className="team-section">
-        <div className="content"><div className="section-heading"><div><span className="kicker">Persönlich für Sie da</span><h2>Unser Team</h2></div><p>Erfahrung, Fachkompetenz und echtes Engagement für nachhaltige Immobilienlösungen.</p></div><div className="team-grid">{team.map(([name,role,bio])=><article key={name}><span>{name.split(' ').map(x=>x[0]).join('')}</span><h3>{name}</h3><strong>{role}</strong><p>{bio}</p></article>)}</div></div>
-      </section>
-
-      <section className="contact-strip" id="kontakt">
-        <div className="content"><div><span className="kicker">Kostenloses Erstgespräch</span><h2>Lassen Sie uns über Ihre Immobilie sprechen.</h2><p>Montag bis Freitag · 08:00–12:00 und 13:30–17:00 Uhr</p></div><a className="button button-light" href="mailto:info@seehafen-immobilien.ch">Kontakt aufnehmen <ArrowRight /></a></div>
-      </section>
-    </main>
-
-    <footer className="footer">
-      <div className="content footer-main">
-        <div><strong>Hauptsitz Schwyz</strong><p>Seehafen & Partner Immobilien AG<br/>Bahnhofstrasse 4<br/>6430 Schwyz</p></div>
-        <div><strong>Filiale Wohlen</strong><p>Cheiblerrain 13<br/>5610 Wohlen</p></div>
-        <div className="footer-contact"><a href="tel:+41444514302"><Phone /> +41 44 451 43 02</a><a href="tel:+41797857880"><Phone /> +41 79 785 78 80</a><a href="mailto:info@seehafen-immobilien.ch"><Mail /> info@seehafen-immobilien.ch</a></div>
-      </div>
-      <div className="content footer-bottom"><span>© 2026 Seehafen & Partner Immobilien AG. Alle Rechte vorbehalten.</span><span><a href="https://seehafen-immobilien.ch/impressum/">Impressum</a><i/> <a href="https://seehafen-immobilien.ch/datenschutzrichtlinie/">Datenschutz</a></span></div>
-    </footer>
-  </div>;
-}
-
-createRoot(document.getElementById('root')).render(<App />);
+function App(){useEffect(()=>window.scrollTo(0,0),[]);const path=window.location.pathname.replace(/\/$/,'')||'/';const pages={'/':<Home/>,'/uber-uns':<About/>,'/dienstleistungen':<Services/>,'/referenzen':<References/>,'/kontakt':<Contact/>};return <><Header/><main>{pages[path]||<Home/>}</main><Footer/></>}
+createRoot(document.getElementById('root')).render(<App/>);
