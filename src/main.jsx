@@ -747,11 +747,6 @@ function References() {
             <h1>Erfolgreiche Projekte.</h1>
             <p>Erfolgreiche Projekte, die für Qualität, Vertrauen und Erfahrung stehen – vom Verkauf über die Vermietung bis zur langfristigen Bewirtschaftung.</p>
           </div>
-          <div className="reference-summary" aria-label="Referenzen im Überblick">
-            <a href="#verkauft"><strong>{soldReferences.length}</strong><span>Verkaufte Objekte</span></a>
-            <a href="#vermietet"><strong>{rentalReferences.length}</strong><span>Vermietungen</span></a>
-            <a href="#verwaltung"><strong>{managementReferences.length}</strong><span>Verwaltungsmandate</span></a>
-          </div>
           {categories.map((category) => (
             <section className="reference-category" id={category.id} key={category.id}>
               <div className="reference-category-heading">

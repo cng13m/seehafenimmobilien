@@ -1338,50 +1338,6 @@ div {
   margin-bottom: 56px;
 }
 
-.reference-summary {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-bottom: 112px;
-  background: #fff;
-  border: 1px solid var(--line);
-}
-
-.reference-summary a {
-  display: flex;
-  min-height: 150px;
-  padding: 28px 30px;
-  border-right: 1px solid var(--line);
-  flex-direction: column;
-  justify-content: flex-end;
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.reference-summary a:last-child {
-  border-right: 0;
-}
-
-.reference-summary a:hover {
-  color: #fff;
-  background: var(--green-900);
-}
-
-.reference-summary strong {
-  color: var(--green-800);
-  font-size: 46px;
-  font-weight: 500;
-  line-height: 1;
-}
-
-.reference-summary a:hover strong {
-  color: var(--gold);
-}
-
-.reference-summary span {
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .reference-category {
   margin-top: 112px;
   scroll-margin-top: 125px;
@@ -2437,26 +2393,6 @@ div {
 
   .service-detail-visual > img {
     height: 235px;
-  }
-
-  .reference-summary {
-    grid-template-columns: 1fr;
-    margin-bottom: 72px;
-  }
-
-  .reference-summary a {
-    min-height: 112px;
-    padding: 22px 24px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .reference-summary a:last-child {
-    border-bottom: 0;
-  }
-
-  .reference-summary strong {
-    font-size: 38px;
   }
 
   .reference-category {
