@@ -1338,36 +1338,18 @@ div {
   margin-bottom: 56px;
 }
 
-.reference-category {
-  margin-top: 112px;
-  scroll-margin-top: 125px;
+.reference-show-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
 }
 
-.reference-category:first-of-type {
-  margin-top: 0;
+.reference-show-more .button {
+  min-width: 190px;
 }
 
-.reference-category-heading {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.75fr);
-  gap: 72px;
-  align-items: end;
-  margin-bottom: 42px;
-}
-
-.reference-category-heading h2 {
-  margin: 0;
-  font-size: clamp(34px, 3.7vw, 48px);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 1.08;
-}
-
-.reference-category-heading > p {
-  margin: 0 0 4px;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.7;
+.reference-show-more .button:hover svg {
+  transform: translateY(4px);
 }
 
 .listings-page {
@@ -2395,22 +2377,8 @@ div {
     height: 235px;
   }
 
-  .reference-category {
-    margin-top: 76px;
-  }
-
-  .reference-category-heading {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    margin-bottom: 30px;
-  }
-
-  .reference-category-heading h2 {
-    font-size: 34px;
-  }
-
-  .reference-category-heading > p {
-    font-size: 15px;
+  .reference-show-more {
+    margin-top: 36px;
   }
 
   .listings-page {

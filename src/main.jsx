@@ -147,6 +147,8 @@ const managementReferences = [
   ['Wohn- und Gewerbeliegenschaft', 'Schaffhausen SH', 'Verwaltungsmandat', '16 Wohnungen · 2 Gewerbeflächen', '/assets/references/manage-schaffhausen.png'],
 ];
 
+const references = [...soldReferences, ...rentalReferences, ...managementReferences];
+
 const process = [
   ['01', 'Erstgespräch', 'Wir besprechen Ihre Ziele, Anforderungen und Erwartungen in einem persönlichen Gespräch.'],
   ['02', 'Analyse', 'Wir analysieren Ihre Immobilie oder Ihren Bedarf und entwickeln eine massgeschneiderte Strategie.'],
@@ -714,29 +716,8 @@ function OffersOverview() {
 }
 
 function References() {
-  const categories = [
-    {
-      id: 'verkauft',
-      kicker: 'Verkaufte Objekte',
-      title: 'Erfolgreich verkauft.',
-      text: 'Diese Referenzen zeigen eine Auswahl erfolgreich verkaufter Objekte. Sie stehen für unsere Erfahrung, Marktkenntnis und eine professionelle Verkaufsbegleitung.',
-      items: soldReferences,
-    },
-    {
-      id: 'vermietet',
-      kicker: 'Vermietungen',
-      title: 'Erfolgreich vermietet.',
-      text: 'Ein Überblick über ausgewählte Immobilien, die wir erfolgreich vermieten durften. Jede Vermietung wurde sorgfältig begleitet und individuell auf Objekt und Markt abgestimmt.',
-      items: rentalReferences,
-    },
-    {
-      id: 'verwaltung',
-      kicker: 'Aktuelle Verwaltungsmandate',
-      title: 'Langfristig betreut.',
-      text: 'Eine Auswahl aktueller Verwaltungsmandate, die unsere Erfahrung in der professionellen Immobilienbewirtschaftung unterstreichen.',
-      items: managementReferences,
-    },
-  ];
+  const [showAllReferences, setShowAllReferences] = useState(false);
+  const visibleReferences = showAllReferences ? references : references.slice(0, 9);
 
   return (
     <>
@@ -747,20 +728,24 @@ function References() {
             <h1>Erfolgreiche Projekte.</h1>
             <p>Erfolgreiche Projekte, die für Qualität, Vertrauen und Erfahrung stehen – vom Verkauf über die Vermietung bis zur langfristigen Bewirtschaftung.</p>
           </div>
-          {categories.map((category) => (
-            <section className="reference-category" id={category.id} key={category.id}>
-              <div className="reference-category-heading">
-                <div>
-                  <span className="kicker">{category.kicker}</span>
-                  <h2>{category.title}</h2>
-                </div>
-                <p>{category.text}</p>
-              </div>
-              <div className="reference-archive-grid">
-                {category.items.map((item, index) => <ReferenceTile key={`${category.id}-${item[1]}-${index}`} item={item} />)}
-              </div>
-            </section>
-          ))}
+          <div className="reference-archive-grid" id="reference-grid">
+            {visibleReferences.map((item, index) => (
+              <ReferenceTile key={`${item[2]}-${item[1]}-${index}`} item={item} />
+            ))}
+          </div>
+          {!showAllReferences && (
+            <div className="reference-show-more">
+              <button
+                className="button button-solid"
+                type="button"
+                onClick={() => setShowAllReferences(true)}
+                aria-controls="reference-grid"
+                aria-expanded="false"
+              >
+                Mehr anzeigen <ArrowDown aria-hidden="true" />
+              </button>
+            </div>
+          )}
         </div>
       </section>
       <CTA />
