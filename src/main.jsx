@@ -147,8 +147,6 @@ const managementReferences = [
   ['Wohn- und Gewerbeliegenschaft', 'Schaffhausen SH', 'Verwaltungsmandat', '16 Wohnungen · 2 Gewerbeflächen', '/assets/references/manage-schaffhausen.png'],
 ];
 
-const references = [...soldReferences, ...rentalReferences, ...managementReferences];
-
 const process = [
   ['01', 'Erstgespräch', 'Wir besprechen Ihre Ziele, Anforderungen und Erwartungen in einem persönlichen Gespräch.'],
   ['02', 'Analyse', 'Wir analysieren Ihre Immobilie oder Ihren Bedarf und entwickeln eine massgeschneiderte Strategie.'],
@@ -434,6 +432,42 @@ function BenefitsSection() {
   );
 }
 
+function HomeOffers() {
+  return (
+    <section className="home-offers">
+      <div className="content">
+        <div className="section-heading home-offers-heading">
+          <div>
+            <span className="kicker">Immobilien</span>
+            <h2>Unsere aktuellen Angebote.</h2>
+          </div>
+          <a className="text-link" href="/immobilien">Alle Angebote <ArrowRight aria-hidden="true" /></a>
+        </div>
+        <div className="home-offers-grid">
+          <a className="home-offer-card" href="/immobilien">
+            <img src="/assets/property-3.jpg" alt="" loading="lazy" />
+            <div>
+              <span className="reference-type">Aktuelle Angebote</span>
+              <h3>Immobilien zum Kauf.</h3>
+              <p>Entdecken Sie unsere aktuell verfügbaren Kaufobjekte auf dem offiziellen Anbieterprofil.</p>
+              <span className="home-offer-link">Kaufobjekte ansehen <ArrowRight aria-hidden="true" /></span>
+            </div>
+          </a>
+          <a className="home-offer-card" href="/immobilien">
+            <img src="/assets/property-1.jpg" alt="" loading="lazy" />
+            <div>
+              <span className="reference-type">Aktuelle Angebote</span>
+              <h3>Immobilien zur Miete.</h3>
+              <p>Alle verfügbaren Mietobjekte finden Sie jederzeit aktuell auf unserem offiziellen Anbieterprofil.</p>
+              <span className="home-offer-link">Mietobjekte ansehen <ArrowRight aria-hidden="true" /></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Home() {
   return (
     <>
@@ -474,20 +508,19 @@ function Home() {
         </div>
       </section>
 
-      <ProcessSection />
-      <BenefitsSection />
+      <HomeOffers />
 
       <section className="home-references">
         <div className="content">
           <div className="section-heading">
             <div>
               <span className="kicker">Referenzen</span>
-              <h2>Kürzlich begleitete Objekte.</h2>
+              <h2>Kürzlich verkaufte Objekte.</h2>
             </div>
             <a className="text-link" href="/referenzen">Alle Referenzen <ArrowRight aria-hidden="true" /></a>
           </div>
           <div className="reference-preview-grid">
-            {references.slice(0, 3).map((item) => <ReferenceTile key={item[0]} item={item} />)}
+            {soldReferences.map((item) => <ReferenceTile key={`${item[0]}-${item[1]}`} item={item} />)}
           </div>
         </div>
       </section>
@@ -542,6 +575,8 @@ function About() {
           ))}
         </div>
       </section>
+      <ProcessSection />
+      <BenefitsSection />
       <section className="quote-section">
         <div className="content">
           <p>„Wir begleiten nicht nur Immobilien – wir bauen Beziehungen auf, die langfristig tragen.“</p>
