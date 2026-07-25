@@ -378,7 +378,7 @@ div {
   z-index: 1;
   display: flex;
   height: 100%;
-  padding-bottom: 112px;
+  padding-bottom: 100px;
   flex-direction: column;
   justify-content: flex-end;
 }
@@ -429,34 +429,6 @@ div {
   color: var(--green-950);
   background: var(--gold);
   border-color: var(--gold);
-}
-
-.hero-cta {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: min(340px, 34vw);
-  height: 92px;
-  padding: 0 30px;
-  color: var(--green-950);
-  background: var(--gold);
-  font-weight: 800;
-}
-
-.hero-cta svg {
-  width: 19px;
-  transition: transform 0.2s ease;
-}
-
-.hero-cta:hover {
-  background: var(--gold-soft);
-}
-
-.hero-cta:hover svg {
-  transform: translateX(5px);
 }
 
 /* Shared editorial sections */
@@ -1891,15 +1863,11 @@ div {
   }
 
   .hero-content {
-    padding-bottom: 112px;
+    padding-bottom: 96px;
   }
 
   .hero h1 {
     font-size: clamp(48px, 9.5vw, 66px);
-  }
-
-  .hero-cta {
-    width: 330px;
   }
 
   .home-heading,
@@ -2041,7 +2009,7 @@ div {
   }
 
   .hero-content {
-    padding-bottom: 105px;
+    padding-bottom: 54px;
   }
 
   .hero-eyebrow {
@@ -2063,13 +2031,6 @@ div {
 
   .hero-scroll {
     display: none;
-  }
-
-  .hero-cta {
-    left: 0;
-    width: 100%;
-    height: 76px;
-    padding-inline: 18px;
   }
 
   .home-intro,

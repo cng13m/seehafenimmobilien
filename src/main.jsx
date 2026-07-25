@@ -215,7 +215,7 @@ function Header({ currentPath }) {
         <nav id="main-navigation" className={`main-nav${open ? ' is-open' : ''}`} aria-label="Hauptnavigation">
           {navGroups.map((group) => <NavDropdown group={group} currentPath={currentPath} key={group.label} />)}
           <a href="/kontakt" className={currentPath === '/kontakt' ? 'is-active' : ''} aria-current={currentPath === '/kontakt' ? 'page' : undefined}>Kontakt</a>
-          <a className="header-cta" href="/kontakt">Beratung vereinbaren <ArrowRight aria-hidden="true" /></a>
+          <a className="header-cta" href="/kontakt">Kostenlose Bewertung <ArrowRight aria-hidden="true" /></a>
         </nav>
         <button
           className="nav-toggle"
@@ -417,7 +417,6 @@ function Home() {
           <a className="hero-scroll" href="#expertise" aria-label="Zu den Leistungen">
             <ArrowDown aria-hidden="true" />
           </a>
-          <a className="hero-cta" href="/kontakt">Kostenlose Bewertung <ArrowRight aria-hidden="true" /></a>
         </div>
       </section>
 
