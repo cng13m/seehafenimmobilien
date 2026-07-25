@@ -475,6 +475,13 @@ function OfferShowcase({ detailed = false }) {
   const profileUrl = 'https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag';
   const detailHref = detailed ? profileUrl : `/immobilien?angebot=${offer.slug}`;
 
+  useEffect(() => {
+    offerShowcaseItems.forEach(({ image }) => {
+      const preload = new Image();
+      preload.src = image;
+    });
+  }, []);
+
   function showPrevious() {
     setActiveIndex((index) => (index - 1 + offerShowcaseItems.length) % offerShowcaseItems.length);
   }
@@ -499,7 +506,7 @@ function OfferShowcase({ detailed = false }) {
         </a>
       </div>
 
-      <div className="offer-showcase-stage" key={offer.slug}>
+      <div className="offer-showcase-stage">
         <div className="offer-showcase-image">
           <img src={offer.image} alt="" />
           <span>{String(activeIndex + 1).padStart(2, '0')} / {String(offerShowcaseItems.length).padStart(2, '0')}</span>
