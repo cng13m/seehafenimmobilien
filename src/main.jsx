@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ArrowDown,
+  ArrowLeft,
   ArrowRight,
+  Building2,
   Check,
   ChevronDown,
   ExternalLink,
@@ -10,6 +12,7 @@ import {
   MapPin,
   Menu,
   Phone,
+  RefreshCw,
   Ruler,
   X,
 } from 'lucide-react';
@@ -107,6 +110,36 @@ const homeServices = [
     image: '/assets/team-3.jpg',
     text: 'Nachvollziehbare Entscheidungsgrundlagen für Eigentümer, Käufer und Investoren.',
     href: '/dienstleistungen/immobilienbewertung',
+  },
+];
+
+const offerShowcaseItems = [
+  {
+    slug: 'kaufen',
+    label: 'Kaufen',
+    title: 'Aktuelle Immobilien zum Kauf.',
+    text: 'Entdecken Sie verfügbare Wohn- und Renditeobjekte auf unserem laufend aktualisierten Anbieterprofil.',
+    image: '/assets/property-3.jpg',
+    location: 'Schweizweit',
+    types: 'Wohn- & Renditeobjekte',
+  },
+  {
+    slug: 'mieten',
+    label: 'Mieten',
+    title: 'Aktuelle Immobilien zur Miete.',
+    text: 'Finden Sie Ihr neues Zuhause oder passende Gewerberäume unter unseren aktuellen Mietangeboten.',
+    image: '/assets/property-1.jpg',
+    location: 'Schweizweit',
+    types: 'Wohnen & Gewerbe',
+  },
+  {
+    slug: 'erstvermietung',
+    label: 'Erstvermietung',
+    title: 'Neubau- und Erstvermietungsprojekte.',
+    text: 'Moderne Immobilien und neue Projekte – professionell vermarktet und persönlich begleitet.',
+    image: '/assets/hero-original.jpg',
+    location: 'Ausgewählte Regionen',
+    types: 'Neubau & Erstbezug',
   },
 ];
 
@@ -434,37 +467,84 @@ function BenefitsSection() {
   );
 }
 
+function OfferShowcase({ detailed = false }) {
+  const requestedOffer = detailed ? new URLSearchParams(window.location.search).get('angebot') : null;
+  const requestedIndex = offerShowcaseItems.findIndex((offer) => offer.slug === requestedOffer);
+  const [activeIndex, setActiveIndex] = useState(requestedIndex >= 0 ? requestedIndex : 0);
+  const offer = offerShowcaseItems[activeIndex];
+  const profileUrl = 'https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag';
+  const detailHref = detailed ? profileUrl : `/immobilien?angebot=${offer.slug}`;
+
+  function showPrevious() {
+    setActiveIndex((index) => (index - 1 + offerShowcaseItems.length) % offerShowcaseItems.length);
+  }
+
+  function showNext() {
+    setActiveIndex((index) => (index + 1) % offerShowcaseItems.length);
+  }
+
+  return (
+    <div className="offer-showcase">
+      <div className="offer-showcase-heading">
+        <div>
+          <span className="kicker">Immobilien</span>
+          <h2>Unsere aktuellen Angebote.</h2>
+        </div>
+        <a
+          className="text-link"
+          href={detailed ? profileUrl : '/immobilien'}
+          {...(detailed ? { target: '_blank', rel: 'noreferrer' } : {})}
+        >
+          Alle Angebote {detailed ? <ExternalLink aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+        </a>
+      </div>
+
+      <div className="offer-showcase-stage" key={offer.slug}>
+        <div className="offer-showcase-image">
+          <img src={offer.image} alt="" />
+          <span>{String(activeIndex + 1).padStart(2, '0')} / {String(offerShowcaseItems.length).padStart(2, '0')}</span>
+        </div>
+        <article className="offer-showcase-info">
+          <span className="reference-type">{offer.label}</span>
+          <h3>{offer.title}</h3>
+          <p>{offer.text}</p>
+          <div className="offer-showcase-facts">
+            <span><MapPin aria-hidden="true" /> {offer.location}</span>
+            <span><Building2 aria-hidden="true" /> {offer.types}</span>
+            <span><RefreshCw aria-hidden="true" /> Laufend aktualisiert</span>
+          </div>
+          <a
+            className="offer-showcase-detail"
+            href={detailHref}
+            {...(detailed ? { target: '_blank', rel: 'noreferrer' } : {})}
+          >
+            {detailed ? 'Angebote öffnen' : 'Details'} {detailed ? <ExternalLink aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+          </a>
+        </article>
+      </div>
+
+      <div className="offer-showcase-footer">
+        <div className="offer-showcase-controls" aria-label="Angebote wechseln">
+          <button type="button" onClick={showPrevious} aria-label="Vorheriges Angebot"><ArrowLeft aria-hidden="true" /></button>
+          <button type="button" onClick={showNext} aria-label="Nächstes Angebot"><ArrowRight aria-hidden="true" /></button>
+        </div>
+        <a
+          className="button button-solid"
+          href={detailed ? profileUrl : '/immobilien'}
+          {...(detailed ? { target: '_blank', rel: 'noreferrer' } : {})}
+        >
+          Alle Angebote {detailed && <ExternalLink aria-hidden="true" />}
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function HomeOffers() {
   return (
     <section className="home-offers">
       <div className="content">
-        <div className="section-heading home-offers-heading">
-          <div>
-            <span className="kicker">Immobilien</span>
-            <h2>Unsere aktuellen Angebote.</h2>
-          </div>
-          <a className="text-link" href="/immobilien">Alle Angebote <ArrowRight aria-hidden="true" /></a>
-        </div>
-        <div className="home-offers-grid">
-          <a className="home-offer-card" href="/immobilien">
-            <img src="/assets/property-3.jpg" alt="" loading="lazy" />
-            <div>
-              <span className="reference-type">Aktuelle Angebote</span>
-              <h3>Immobilien zum Kauf.</h3>
-              <p>Entdecken Sie unsere aktuell verfügbaren Kaufobjekte auf dem offiziellen Anbieterprofil.</p>
-              <span className="home-offer-link">Kaufobjekte ansehen <ArrowRight aria-hidden="true" /></span>
-            </div>
-          </a>
-          <a className="home-offer-card" href="/immobilien">
-            <img src="/assets/property-1.jpg" alt="" loading="lazy" />
-            <div>
-              <span className="reference-type">Aktuelle Angebote</span>
-              <h3>Immobilien zur Miete.</h3>
-              <p>Alle verfügbaren Mietobjekte finden Sie jederzeit aktuell auf unserem offiziellen Anbieterprofil.</p>
-              <span className="home-offer-link">Mietobjekte ansehen <ArrowRight aria-hidden="true" /></span>
-            </div>
-          </a>
-        </div>
+        <OfferShowcase />
       </div>
     </section>
   );
@@ -756,17 +836,9 @@ function References() {
 function Listings() {
   return (
     <>
-      <PageHero label="Immobilien" title="Aktuelle Angebote" text="Unsere Kauf- und Mietobjekte werden zentral und aktuell auf unserem offiziellen Homegate-Anbieterprofil veröffentlicht." />
-      <section className="listings-page">
-        <div className="content listings-panel">
-          <div>
-            <span className="kicker">Immer aktuell auf Homegate</span>
-            <h2>Entdecken Sie unsere aktuellen Immobilienangebote.</h2>
-            <p>Alle verfügbaren Kauf- und Mietobjekte finden Sie direkt auf unserem offiziellen Homegate-Profil. Dort sehen Sie jederzeit den aktuellen Stand.</p>
-          </div>
-          <a className="button button-solid" href="https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag" target="_blank" rel="noreferrer">
-            Angebote auf Homegate <ExternalLink aria-hidden="true" />
-          </a>
+      <section className="offers-page">
+        <div className="content">
+          <OfferShowcase detailed />
         </div>
       </section>
       <CTA />
