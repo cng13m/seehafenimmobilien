@@ -110,14 +110,44 @@ const homeServices = [
   },
 ];
 
-const references = [
-  ['Mehrfamilienhaus Hägglingen', 'Hägglingen AG', 'Verkauft', '6 Wohnungen', '/assets/property-1.jpg'],
-  ['Wohnportfolio in Olten', 'Olten SO', 'Verkauft', '24 Wohnungen', '/assets/property-2.jpg'],
-  ['3.5-Zimmer-Wohnung', 'Zürich ZH', 'Verkauft', 'Wohnung', '/assets/property-3.jpg'],
-  ['Attika-Maisonette-Terrassenhaus', 'Rieden SG', 'Vermietet', '5.5 Zimmer', '/assets/team-3.jpg'],
-  ['Wohnungen in Wohlen', 'Wohlen AG', 'Vermietet', '2.5 & 3.5 Zimmer', '/assets/team-2.jpg'],
-  ['Wohn- und Gewerbeliegenschaft', 'Schaffhausen', 'Verwaltungsmandat', '16 Wohnungen · 2 Gewerbe', '/assets/team-1.jpg'],
+const soldReferences = [
+  ['Mehrfamilienhaus', 'Hägglingen AG', 'Verkauft', '6 Wohnungen', '/assets/references/sale-haegglingen-6.jpg'],
+  ['Wohnportfolio', 'Olten SO', 'Verkauft', '24 Wohnungen', '/assets/references/sale-olten-24.jpg'],
+  ['3.5-Zimmer-Wohnung', 'Zürich ZH', 'Verkauft', '3.5 Zimmer', '/assets/references/sale-zuerich-35.jpg'],
+  ['3.5-Zimmer-Wohnung', 'Bubikon ZH', 'Verkauft', '3.5 Zimmer', '/assets/references/sale-bubikon-35.jpg'],
+  ['2.5-Zimmer-Wohnung', 'Hinwil ZH', 'Verkauft', '2.5 Zimmer', '/assets/references/sale-hinwil-25.jpg'],
+  ['4.5-Zimmer-Wohnung', 'Dällikon ZH', 'Verkauft', '4.5 Zimmer', '/assets/references/sale-daellikon-45.png'],
 ];
+
+const rentalReferences = [
+  ['4.5-Zimmer-Wohnung', 'Würenlos AG', 'Vermietet', '4.5 Zimmer', '/assets/references/rent-wuerenlos-45.jpg'],
+  ['1.5-Zimmer-Wohnung', 'Zürich ZH', 'Vermietet', '1.5 Zimmer', '/assets/references/rent-zuerich-15.jpg'],
+  ['Zwei 4.5-Zimmer-Wohnungen', 'Aarburg AG', 'Vermietet', '2 Wohnungen', '/assets/references/rent-aarburg-45.png'],
+  ['4.5-Zimmer-Wohnung', 'Reichenburg SZ', 'Vermietet', '4.5 Zimmer', '/assets/references/rent-reichenburg-45.jpg'],
+  ['3.5-Zimmer-Wohnung', 'Rudolfstetten AG', 'Vermietet', '3.5 Zimmer', '/assets/references/rent-rudolfstetten-35.png'],
+  ['4.5- & 3.5-Zimmer-Wohnungen', 'Altstetten ZH', 'Vermietet', '2 Wohnungen', '/assets/references/rent-altstetten.jpg'],
+  ['Attika-Maisonette-Terrassenhaus', 'Rieden SG', 'Vermietet', '5.5 Zimmer', '/assets/references/rent-rieden-attika.jpg'],
+  ['5.5-Zimmer-Wohnung', 'Zürich ZH', 'Vermietet', '5.5 Zimmer', '/assets/references/rent-zuerich-55.jpg'],
+  ['2.5- & 3.5-Zimmer-Wohnungen', 'Wohlen AG', 'Vermietet', '2 Wohnungen', '/assets/references/rent-wohlen-25-35.jpg'],
+  ['3.5-Zimmer-Wohnung', 'Zürich ZH', 'Vermietet', '3.5 Zimmer', '/assets/references/rent-zuerich-35.jpg'],
+  ['4.5-Zimmer-Wohnung', 'Wohlen AG', 'Vermietet', '4.5 Zimmer', '/assets/references/rent-wohlen-45.jpg'],
+  ['4-Zimmer-Reihenhaus', 'Wohlen AG', 'Vermietet', '4 Zimmer', '/assets/references/rent-wohlen-reihenhaus.jpg'],
+  ['Gewerbefläche', 'Wohlen AG', 'Vermietet', 'Gewerbe', '/assets/references/rent-wohlen-gewerbe.jpg'],
+  ['1.5-Zimmer-Wohnung', 'Opfikon ZH', 'Vermietet', '1.5 Zimmer', '/assets/references/rent-opfikon-15.jpg'],
+];
+
+const managementReferences = [
+  ['Wohnliegenschaft', 'Bubendorf BL', 'Verwaltungsmandat', '6 Wohnungen', '/assets/references/manage-bubendorf-6.jpg'],
+  ['Wohn- und Geschäftsliegenschaft', '', 'Verwaltungsmandat', '2 Ladenflächen · 6 Wohnungen', '/assets/references/manage-shops-apartments.jpg'],
+  ['Wohnliegenschaft', 'Staad SG', 'Verwaltungsmandat', '8 Wohnungen', '/assets/references/manage-staad-8.jpg'],
+  ['Wohnliegenschaft', 'Hägglingen AG', 'Verwaltungsmandat', '6 Wohnungen', '/assets/references/manage-haegglingen-6.jpg'],
+  ['Wohnliegenschaft', 'Rheineck SG', 'Verwaltungsmandat', '12 Wohnungen', '/assets/references/manage-rheineck-12.jpg'],
+  ['Wohnliegenschaft', 'Glarus GL', 'Verwaltungsmandat', '8 Wohnungen', '/assets/references/manage-glarus-8.jpg'],
+  ['Wohnliegenschaft', 'Hägglingen AG', 'Verwaltungsmandat', '8 Wohnungen', '/assets/references/manage-haegglingen-8.png'],
+  ['Wohn- und Gewerbeliegenschaft', 'Schaffhausen SH', 'Verwaltungsmandat', '16 Wohnungen · 2 Gewerbeflächen', '/assets/references/manage-schaffhausen.png'],
+];
+
+const references = [...soldReferences, ...rentalReferences, ...managementReferences];
 
 const process = [
   ['01', 'Erstgespräch', 'Wir besprechen Ihre Ziele, Anforderungen und Erwartungen in einem persönlichen Gespräch.'],
@@ -316,8 +346,8 @@ function ReferenceTile({ item }) {
         <span className="reference-type">{type}</span>
         <h3>{title}</h3>
         <div className="reference-tile-meta">
-          <span><MapPin aria-hidden="true" /> {location}</span>
-          <span><Ruler aria-hidden="true" /> {detail}</span>
+          {location && <span><MapPin aria-hidden="true" /> {location}</span>}
+          {detail && <span><Ruler aria-hidden="true" /> {detail}</span>}
         </div>
       </div>
     </article>
@@ -649,6 +679,30 @@ function OffersOverview() {
 }
 
 function References() {
+  const categories = [
+    {
+      id: 'verkauft',
+      kicker: 'Verkaufte Objekte',
+      title: 'Erfolgreich verkauft.',
+      text: 'Diese Referenzen zeigen eine Auswahl erfolgreich verkaufter Objekte. Sie stehen für unsere Erfahrung, Marktkenntnis und eine professionelle Verkaufsbegleitung.',
+      items: soldReferences,
+    },
+    {
+      id: 'vermietet',
+      kicker: 'Vermietungen',
+      title: 'Erfolgreich vermietet.',
+      text: 'Ein Überblick über ausgewählte Immobilien, die wir erfolgreich vermieten durften. Jede Vermietung wurde sorgfältig begleitet und individuell auf Objekt und Markt abgestimmt.',
+      items: rentalReferences,
+    },
+    {
+      id: 'verwaltung',
+      kicker: 'Aktuelle Verwaltungsmandate',
+      title: 'Langfristig betreut.',
+      text: 'Eine Auswahl aktueller Verwaltungsmandate, die unsere Erfahrung in der professionellen Immobilienbewirtschaftung unterstreichen.',
+      items: managementReferences,
+    },
+  ];
+
   return (
     <>
       <section className="reference-archive">
@@ -656,20 +710,27 @@ function References() {
           <div className="reference-archive-intro">
             <span className="kicker">Referenzen</span>
             <h1>Erfolgreiche Projekte.</h1>
-            <p>Eine Auswahl erfolgreich verkaufter, vermieteter und verwalteter Immobilien – sorgfältig begleitet und individuell auf Objekt und Markt abgestimmt.</p>
+            <p>Erfolgreiche Projekte, die für Qualität, Vertrauen und Erfahrung stehen – vom Verkauf über die Vermietung bis zur langfristigen Bewirtschaftung.</p>
           </div>
-          <div className="reference-archive-toolbar">
-            <span>{references.length} ausgewählte Projekte</span>
-            <span><MapPin aria-hidden="true" /> Schweizweit begleitet</span>
+          <div className="reference-summary" aria-label="Referenzen im Überblick">
+            <a href="#verkauft"><strong>{soldReferences.length}</strong><span>Verkaufte Objekte</span></a>
+            <a href="#vermietet"><strong>{rentalReferences.length}</strong><span>Vermietungen</span></a>
+            <a href="#verwaltung"><strong>{managementReferences.length}</strong><span>Verwaltungsmandate</span></a>
           </div>
-          <div className="reference-archive-grid">
-            {references.map((item) => <ReferenceTile key={item[0]} item={item} />)}
-          </div>
-          <div className="reference-mandates">
-            <span className="kicker">Langfristige Partnerschaften</span>
-            <h2>Weitere Verwaltungsmandate</h2>
-            <p>6 Wohnungen in Bubendorf · 8 Wohnungen in Staad · 6 Wohnungen in Hägglingen · 12 Wohnungen in Rheineck · 8 Wohnungen in Glarus</p>
-          </div>
+          {categories.map((category) => (
+            <section className="reference-category" id={category.id} key={category.id}>
+              <div className="reference-category-heading">
+                <div>
+                  <span className="kicker">{category.kicker}</span>
+                  <h2>{category.title}</h2>
+                </div>
+                <p>{category.text}</p>
+              </div>
+              <div className="reference-archive-grid">
+                {category.items.map((item, index) => <ReferenceTile key={`${category.id}-${item[1]}-${index}`} item={item} />)}
+              </div>
+            </section>
+          ))}
         </div>
       </section>
       <CTA />
