@@ -1339,37 +1339,33 @@ div {
   background: var(--cream);
 }
 
-.listings-empty {
-  display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 56px;
+.listings-panel {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 56px;
   padding: 54px;
   background: #fff;
+  border-left: 5px solid var(--gold);
 }
 
-.listing-count {
-  padding-right: 48px;
-  color: var(--green-800);
-  border-right: 1px solid var(--line);
-  font-size: 112px;
-  font-weight: 300;
-  line-height: 1;
-  text-align: center;
-}
-
-.listings-empty h2 {
+.listings-panel h2 {
+  max-width: 720px;
   margin: 0 0 14px;
   font-size: 34px;
   font-weight: 600;
   letter-spacing: -0.03em;
 }
 
-.listings-empty p {
+.listings-panel p {
   max-width: 690px;
-  margin: 0 0 26px;
+  margin: 0;
   color: var(--muted);
   line-height: 1.7;
+}
+
+.listings-panel .button {
+  flex: 0 0 auto;
 }
 
 /* Contact */
@@ -2371,21 +2367,14 @@ div {
     padding: 58px 0 72px;
   }
 
-  .listings-empty {
-    grid-template-columns: 1fr;
+  .listings-panel {
+    align-items: flex-start;
     gap: 26px;
     padding: 28px 22px;
+    flex-direction: column;
   }
 
-  .listing-count {
-    padding: 0 0 20px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 76px;
-    text-align: left;
-  }
-
-  .listings-empty h2 {
+  .listings-panel h2 {
     font-size: 29px;
   }
 

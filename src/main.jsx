@@ -683,16 +683,15 @@ function Listings() {
     <>
       <PageHero label="Immobilien" title="Aktuelle Angebote" text="Unsere Kauf- und Mietobjekte werden zentral und aktuell auf unserem offiziellen Homegate-Anbieterprofil veröffentlicht." />
       <section className="listings-page">
-        <div className="content listings-empty">
-          <span className="listing-count">0</span>
+        <div className="content listings-panel">
           <div>
-            <span className="kicker">Aktueller Stand auf Homegate</span>
-            <h2>Zurzeit sind keine Immobilien im Angebot.</h2>
-            <p>Neue Kauf- und Mietobjekte erscheinen auf unserem offiziellen Homegate-Profil. Besuchen Sie das Profil oder kontaktieren Sie uns, wenn Sie eine passende Immobilie suchen.</p>
-            <a className="button button-solid" href="https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag" target="_blank" rel="noreferrer">
-              Homegate-Profil öffnen <ExternalLink aria-hidden="true" />
-            </a>
+            <span className="kicker">Immer aktuell auf Homegate</span>
+            <h2>Entdecken Sie unsere aktuellen Immobilienangebote.</h2>
+            <p>Alle verfügbaren Kauf- und Mietobjekte finden Sie direkt auf unserem offiziellen Homegate-Profil. Dort sehen Sie jederzeit den aktuellen Stand.</p>
           </div>
+          <a className="button button-solid" href="https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag" target="_blank" rel="noreferrer">
+            Angebote auf Homegate <ExternalLink aria-hidden="true" />
+          </a>
         </div>
       </section>
       <CTA />
