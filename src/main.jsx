@@ -347,15 +347,15 @@ function PageHero({ label, title, text, image }) {
 
   return (
     <section className="page-hero">
-      <div className="page-hero-media">
-        <img src={heroImage} alt="" />
-      </div>
-      <div className="content page-hero-copy">
-        <div>
+      <div className="content page-hero-grid">
+        <div className="page-hero-copy">
           <span className="kicker">{label}</span>
           <h1>{title}</h1>
+          <p>{text}</p>
         </div>
-        <p>{text}</p>
+        <div className="page-hero-media">
+          <img src={heroImage} alt="" />
+        </div>
       </div>
     </section>
   );
@@ -576,7 +576,7 @@ function Home() {
             <a className="text-link" href="/referenzen">Alle Referenzen <ArrowRight aria-hidden="true" /></a>
           </div>
           <div className="reference-preview-grid">
-            {soldReferences.map((item) => <ReferenceTile key={`${item[0]}-${item[1]}`} item={item} />)}
+            {soldReferences.slice(0, 3).map((item) => <ReferenceTile key={`${item[0]}-${item[1]}`} item={item} />)}
           </div>
         </div>
       </section>
@@ -757,13 +757,9 @@ function References() {
 
   return (
     <>
+      <PageHero label="Referenzen" title="Erfolgreiche Projekte." text="Erfolgreiche Projekte, die für Qualität, Vertrauen und Erfahrung stehen – vom Verkauf über die Vermietung bis zur langfristigen Bewirtschaftung." image="/assets/references/sale-haegglingen-6.jpg" />
       <section className="reference-archive">
         <div className="content">
-          <div className="reference-archive-intro">
-            <span className="kicker">Referenzen</span>
-            <h1>Erfolgreiche Projekte.</h1>
-            <p>Erfolgreiche Projekte, die für Qualität, Vertrauen und Erfahrung stehen – vom Verkauf über die Vermietung bis zur langfristigen Bewirtschaftung.</p>
-          </div>
           <div className="reference-archive-grid" id="reference-grid">
             {visibleReferences.map((item, index) => (
               <ReferenceTile key={`${item[2]}-${item[1]}-${index}`} item={item} />
@@ -792,6 +788,7 @@ function References() {
 function Listings() {
   return (
     <>
+      <PageHero label="Immobilien" title="Aktuelle Immobilien." text="Entdecken Sie unsere laufend aktualisierten Kauf-, Miet- und Erstvermietungsangebote auf dem offiziellen Anbieterprofil." image="/assets/property-3.jpg" />
       <section className="offers-page">
         <div className="content">
           <OfferShowcase detailed />
