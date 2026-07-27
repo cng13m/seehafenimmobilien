@@ -268,7 +268,6 @@ function Header({ currentPath }) {
         <Logo />
         <nav id="main-navigation" className={`main-nav${open ? ' is-open' : ''}`} aria-label="Hauptnavigation">
           {navGroups.map((group) => <NavDropdown group={group} currentPath={currentPath} key={group.label} />)}
-          <a href="/kontakt" className={currentPath === '/kontakt' ? 'is-active' : ''} aria-current={currentPath === '/kontakt' ? 'page' : undefined}>Kontakt</a>
           <a className="header-cta" href="/kontakt">Kostenlose Bewertung <ArrowRight aria-hidden="true" /></a>
         </nav>
         <button
@@ -828,62 +827,85 @@ function Contact() {
 
   return (
     <>
-      <PageHero label="Kontakt" title="Nehmen Sie Kontakt auf." text="Haben Sie Fragen oder möchten Sie eine Beratung? Vereinbaren Sie ein kostenloses Erstgespräch – wir freuen uns auf Sie." />
-      <section className="contact-page">
-        <div className="content contact-grid">
-          <article className="contact-card">
-            <span className="kicker">Hauptsitz</span>
-            <h2>Schwyz</h2>
-            <p>Seehafen & Partner Immobilien AG<br />Bahnhofstrasse 4<br />6430 Schwyz</p>
-          </article>
-          <article className="contact-card">
-            <span className="kicker">Filiale</span>
-            <h2>Wohlen</h2>
-            <p>Seehafen & Partner Immobilien AG<br />Cheiblerrain 13<br />5610 Wohlen</p>
-          </article>
-          <article className="contact-card contact-direct">
-            <span className="kicker">Direkter Kontakt</span>
-            <a href="tel:+41444514302"><Phone aria-hidden="true" /> +41 44 451 43 02</a>
-            <a href="tel:+41797857880"><Phone aria-hidden="true" /> +41 79 785 78 80</a>
-            <a href="mailto:info@seehafen-immobilien.ch"><Mail aria-hidden="true" /> info@seehafen-immobilien.ch</a>
-            <p><strong>Öffnungszeiten</strong><br />Montag bis Freitag<br />08:00–12:00 · 13:30–17:00 Uhr</p>
-          </article>
+      <section className="contact-intro">
+        <div className="content contact-intro-copy">
+          <span className="kicker">Kontakt</span>
+          <h1>Wie können wir Ihnen helfen?</h1>
+          <p>Rufen Sie uns an, schreiben Sie uns eine E-Mail oder senden Sie Ihre Anfrage über das Formular. Wir melden uns persönlich bei Ihnen zurück.</p>
         </div>
-
-        <form className="contact-form content" onSubmit={submit}>
-          <div className="form-heading">
-            <span className="kicker">Schreiben Sie uns</span>
-            <h2>Wie können wir Ihnen helfen?</h2>
-            <p>Wir melden uns persönlich bei Ihnen zurück.</p>
-          </div>
-          <div className="form-fields">
-            <label>Name *<input name="name" required autoComplete="name" /></label>
-            <label>E-Mail *<input name="email" type="email" required autoComplete="email" /></label>
-            <label>Telefon<input name="phone" type="tel" autoComplete="tel" /></label>
-            <label>Thema
-              <select name="subject" defaultValue="Allgemeine Anfrage">
-                <option>Allgemeine Anfrage</option>
-                <option>Immobilienverkauf</option>
-                <option>Bewirtschaftung</option>
-                <option>Immobilienberatung</option>
-                <option>Immobiliensuche</option>
-              </select>
-            </label>
-            <label className="full">Nachricht *<textarea name="message" required rows="6" /></label>
-            <label className="honeypot" aria-hidden="true">Website<input name="website" tabIndex="-1" autoComplete="off" /></label>
-            <label className="consent full">
-              <input name="privacy" type="checkbox" required />
-              <span>Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der Bearbeitung meiner Angaben zur Kontaktaufnahme zu.</span>
-            </label>
-            <button className="button button-solid" disabled={status === 'sending'}>
-              {status === 'sending' ? 'Wird gesendet …' : 'Nachricht senden'} <ArrowRight aria-hidden="true" />
-            </button>
-            <div className="form-feedback" aria-live="polite">
-              {status === 'success' && <p className="form-success">Vielen Dank. Ihre Nachricht wurde erfolgreich gesendet.</p>}
-              {status === 'error' && <p className="form-error">{error}</p>}
+      </section>
+      <section className="contact-page">
+        <div className="content contact-layout">
+          <aside className="contact-sidebar">
+            <div className="contact-direct-panel">
+              <span className="kicker">Direkt erreichbar</span>
+              <h2>Persönlich für Sie da.</h2>
+              <div className="contact-methods">
+                <a href="tel:+41444514302">
+                  <Phone aria-hidden="true" />
+                  <span><small>Telefon</small>+41 44 451 43 02</span>
+                </a>
+                <a href="tel:+41797857880">
+                  <Phone aria-hidden="true" />
+                  <span><small>Mobil</small>+41 79 785 78 80</span>
+                </a>
+                <a href="mailto:info@seehafen-immobilien.ch">
+                  <Mail aria-hidden="true" />
+                  <span><small>E-Mail</small>info@seehafen-immobilien.ch</span>
+                </a>
+              </div>
+              <p><strong>Öffnungszeiten</strong><br />Montag bis Freitag<br />08:00–12:00 · 13:30–17:00 Uhr</p>
             </div>
-          </div>
-        </form>
+
+            <div className="contact-locations">
+              <article>
+                <span className="kicker">Hauptsitz</span>
+                <h3>Schwyz</h3>
+                <p>Bahnhofstrasse 4<br />6430 Schwyz</p>
+              </article>
+              <article>
+                <span className="kicker">Filiale</span>
+                <h3>Wohlen</h3>
+                <p>Cheiblerrain 13<br />5610 Wohlen</p>
+              </article>
+            </div>
+          </aside>
+
+          <form className="contact-form" onSubmit={submit}>
+            <div className="form-heading">
+              <span className="kicker">Nachricht senden</span>
+              <h2>Ihre Anfrage</h2>
+              <p>Füllen Sie nur die notwendigen Angaben aus.</p>
+            </div>
+            <div className="form-fields">
+              <label>Name *<input name="name" required autoComplete="name" /></label>
+              <label>E-Mail *<input name="email" type="email" required autoComplete="email" /></label>
+              <label>Telefon<input name="phone" type="tel" autoComplete="tel" /></label>
+              <label>Thema
+                <select name="subject" defaultValue="Allgemeine Anfrage">
+                  <option>Allgemeine Anfrage</option>
+                  <option>Immobilienverkauf</option>
+                  <option>Bewirtschaftung</option>
+                  <option>Immobilienberatung</option>
+                  <option>Immobiliensuche</option>
+                </select>
+              </label>
+              <label className="full">Nachricht *<textarea name="message" required rows="6" /></label>
+              <label className="honeypot" aria-hidden="true">Website<input name="website" tabIndex="-1" autoComplete="off" /></label>
+              <label className="consent full">
+                <input name="privacy" type="checkbox" required />
+                <span>Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der Bearbeitung meiner Angaben zur Kontaktaufnahme zu.</span>
+              </label>
+              <button className="button button-solid" disabled={status === 'sending'}>
+                {status === 'sending' ? 'Wird gesendet …' : 'Nachricht senden'} <ArrowRight aria-hidden="true" />
+              </button>
+              <div className="form-feedback" aria-live="polite">
+                {status === 'success' && <p className="form-success">Vielen Dank. Ihre Nachricht wurde erfolgreich gesendet.</p>}
+                {status === 'error' && <p className="form-error">{error}</p>}
+              </div>
+            </div>
+          </form>
+        </div>
       </section>
     </>
   );
