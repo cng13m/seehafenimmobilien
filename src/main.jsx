@@ -189,15 +189,6 @@ const process = [
   ['04', 'Partnerschaft', 'Wir begleiten Sie langfristig und stehen Ihnen als vertrauensvoller Partner zur Seite.'],
 ];
 
-const benefits = [
-  ['Vertrauen & Sicherheit', 'Ihre Immobilie ist bei uns in sicheren Händen. Wir arbeiten transparent und verlässlich.'],
-  ['Lokale Expertise', 'Wir kennen den Schweizer Markt und verstehen die Besonderheiten der jeweiligen Region.'],
-  ['Persönliche Betreuung', 'Sie haben einen festen Ansprechpartner, der Ihre Situation und Ihre Ziele kennt.'],
-  ['Massgeschneiderte Lösungen', 'Jede Immobilie ist anders. Deshalb entwickeln wir Strategien statt Standardpakete.'],
-  ['Starkes Netzwerk', 'Bewährte Partner ermöglichen kurze Wege, schnelle Reaktionen und saubere Lösungen.'],
-  ['Leidenschaft für Immobilien', 'Wir verbinden fachliche Sorgfalt mit echtem Engagement für Ihr Objekt.'],
-];
-
 const team = [
   ['EL', 'Eduard Laska', 'Geschäftsführer', 'Über 10 Jahre Erfahrung in der Immobilienbranche · Eidg. Fachausweis'],
   ['DL', 'Dorentina Laska', 'Sachbearbeiterin Immobilien', 'Persönliche und zuverlässige Betreuung unserer Kundschaft'],
@@ -208,7 +199,7 @@ const navGroups = [
   {
     label: 'Firma',
     href: '/firma',
-    items: [['Über uns', '/uber-uns'], ['Unser Team', '/team'], ['Werte & Arbeitsweise', '/werte']],
+    items: [['Über uns', '/firma#uber-uns'], ['Unser Team', '/firma#team'], ['Werte & Arbeitsweise', '/firma#werte']],
   },
   {
     label: 'Dienstleistungen',
@@ -443,30 +434,6 @@ function ProcessSection({ compact = false }) {
   );
 }
 
-function BenefitsSection() {
-  return (
-    <section className="benefits-section">
-      <div className="content benefits-layout">
-        <div className="benefits-intro">
-          <span className="kicker">Ihre Vorteile</span>
-          <h2>Warum Seehafen & Partner?</h2>
-          <p>Immobilien verlangen fachliche Sorgfalt und einen Partner, der Verantwortung persönlich nimmt.</p>
-          <a className="text-link" href="/werte">Unsere Arbeitsweise <ArrowRight aria-hidden="true" /></a>
-        </div>
-        <div className="benefits-grid">
-          {benefits.map(([title, text], index) => (
-            <article key={title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function OfferShowcase({ detailed = false }) {
   const requestedOffer = detailed ? new URLSearchParams(window.location.search).get('angebot') : null;
   const requestedIndex = offerShowcaseItems.findIndex((offer) => offer.slug === requestedOffer);
@@ -619,72 +586,37 @@ function Home() {
 }
 
 function CompanyOverview() {
-  return (
-    <>
-      <PageHero label="Firma" title="Immobilien sind persönlich." text="Lernen Sie unsere Haltung, unsere Arbeitsweise und die Menschen hinter Seehafen & Partner kennen." image="/assets/about.jpg" />
-      <OverviewLinks items={[
-        { title: 'Über uns', text: 'Wofür wir stehen und wie wir Immobilien betreuen.', image: '/assets/property-hero.jpg', href: '/uber-uns' },
-        { title: 'Unser Team', text: 'Persönliche Ansprechpartner mit Erfahrung und Engagement.', image: '/assets/team-2.jpg', href: '/team' },
-        { title: 'Werte & Arbeitsweise', text: 'Klar, verlässlich und langfristig orientiert.', image: '/assets/team-3.jpg', href: '/werte' },
-      ]} />
-      <CTA />
-    </>
-  );
-}
+  const values = [
+    ['Verlässlichkeit', 'Wir halten, was wir versprechen, und kommunizieren transparent.'],
+    ['Persönliche Betreuung', 'Sie haben einen festen Ansprechpartner, der Ihre Ziele kennt.'],
+    ['Fachkompetenz', 'Erfahrung und fundierte Marktkenntnis bilden die Basis unserer Arbeit.'],
+    ['Nachhaltigkeit', 'Der langfristige Werterhalt Ihrer Immobilie steht im Mittelpunkt.'],
+  ];
 
-function About() {
   return (
     <>
-      <PageHero label="Über uns" title="Drei Persönlichkeiten. Eine Leidenschaft." text="Wir betreuen Immobilien mit Engagement, Fachwissen und Weitblick – persönlich, effizient und immer im Interesse unserer Kundschaft." image="/assets/about.jpg" />
-      <section className="company-story">
-        <div className="content company-story-grid">
-          <div>
-            <span className="kicker">Seehafen & Partner</span>
-            <h2>Ein verlässlicher Partner für Ihre Immobilie.</h2>
+      <section className="company-about" id="uber-uns">
+        <div className="content company-about-grid">
+          <div className="company-about-copy">
+            <span className="kicker">Über uns</span>
+            <h1>Drei Persönlichkeiten.<br />Eine Leidenschaft.</h1>
+            <p className="company-about-lead">Wir betreuen Immobilien mit Engagement, Fachwissen und Weitblick – persönlich, effizient und immer im Interesse unserer Kundschaft.</p>
+            <div className="company-about-text">
+              <p>Als unabhängiges Immobilienunternehmen hören wir zu, denken voraus und schaffen klare Lösungen.</p>
+              <p>Unser Anspruch ist, Immobilien nicht nur zu verwalten oder zu vermitteln, sondern Werte nachhaltig zu sichern und weiterzuentwickeln.</p>
+            </div>
           </div>
-          <div>
-            <p>Als unabhängiges Immobilienunternehmen handeln wir im Interesse unserer Kundinnen und Kunden. Wir hören zu, denken voraus und schaffen klare Lösungen.</p>
-            <p>Unser Anspruch ist, Immobilien nicht nur zu verwalten oder zu vermitteln, sondern Werte nachhaltig zu sichern und weiterzuentwickeln.</p>
+          <div className="company-about-media">
+            <img src="/assets/about.jpg" alt="Das Team von Seehafen & Partner" />
           </div>
         </div>
       </section>
-      <section className="about-principles">
-        <div className="content principle-grid">
-          {[
-            ['Verlässlichkeit', 'Wir halten, was wir versprechen – mit klaren Prozessen und transparenter Kommunikation.'],
-            ['Persönliche Betreuung', 'Jede Situation ist einzigartig. Sie erhalten eine Lösung, die wirklich zu Ihnen passt.'],
-            ['Fachkompetenz', 'Fundiertes Marktverständnis und langjährige Erfahrung bilden die Basis unserer Arbeit.'],
-            ['Nachhaltigkeit', 'Der langfristige Werterhalt Ihrer Immobilie steht im Zentrum unseres Handelns.'],
-          ].map(([title, text], index) => (
-            <article key={title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-      <ProcessSection />
-      <BenefitsSection />
-      <section className="quote-section">
-        <div className="content">
-          <p>„Wir begleiten nicht nur Immobilien – wir bauen Beziehungen auf, die langfristig tragen.“</p>
-          <a className="text-link" href="/team">Lernen Sie uns kennen <ArrowRight aria-hidden="true" /></a>
-        </div>
-      </section>
-      <CTA />
-    </>
-  );
-}
 
-function TeamPage() {
-  return (
-    <>
-      <section className="team-page">
+      <section className="company-team" id="team">
         <div className="content">
-          <div className="team-page-heading">
-            <span className="kicker">Persönlich für Sie da</span>
-            <h1>Unser Team</h1>
+          <div className="company-section-heading">
+            <span className="kicker">Unser Team</span>
+            <h2>Persönlich für Sie da.</h2>
             <p>Drei Persönlichkeiten, ein gemeinsamer Anspruch: Ihre Immobilie zuverlässig und mit Weitblick zu begleiten.</p>
           </div>
           <div className="team-grid">
@@ -699,29 +631,46 @@ function TeamPage() {
           </div>
         </div>
       </section>
-      <CTA />
-    </>
-  );
-}
 
-function ValuesPage() {
-  return (
-    <>
-      <PageHero label="Werte & Arbeitsweise" title="Klar in der Haltung. Strukturiert im Handeln." text="Unsere Zusammenarbeit basiert auf Vertrauen, transparenter Kommunikation und einem verlässlichen Vorgehen." image="/assets/team-3.jpg" />
-      <section className="values-section">
+      <section className="company-values" id="werte">
         <div className="content">
-          <div className="simple-heading">
-            <span className="kicker">Unsere Werte</span>
-            <h2>Was Sie von uns erwarten dürfen.</h2>
+          <div className="company-section-heading">
+            <span className="kicker">Werte & Arbeitsweise</span>
+            <h2>Klar in der Haltung.<br />Strukturiert im Handeln.</h2>
+            <p>Unsere Zusammenarbeit basiert auf Vertrauen, transparenter Kommunikation und einem verlässlichen Vorgehen.</p>
           </div>
-          <div className="values">
-            <article><strong>Integrität</strong><span>Ehrlich und transparent.</span></article>
-            <article><strong>Qualität</strong><span>Sorgfältig und professionell.</span></article>
-            <article><strong>Weitblick</strong><span>Langfristig Werte erhalten.</span></article>
+          <div className="company-values-layout">
+            <div className="company-values-column">
+              <h3>Unsere Werte</h3>
+              <div className="company-detail-list">
+                {values.map(([title, text], index) => (
+                  <article key={title}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <div>
+                      <h4>{title}</h4>
+                      <p>{text}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="company-values-column">
+              <h3>So arbeiten wir</h3>
+              <div className="company-detail-list">
+                {process.map(([number, title, text]) => (
+                  <article key={title}>
+                    <span>{number}</span>
+                    <div>
+                      <h4>{title}</h4>
+                      <p>{text}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <ProcessSection compact />
       <CTA />
     </>
   );
@@ -1057,6 +1006,9 @@ const meta = {
 function App() {
   const path = window.location.pathname.replace(/\/$/, '') || '/';
   const aliases = {
+    '/uber-uns': '/firma',
+    '/team': '/firma',
+    '/werte': '/firma',
     '/datenschutzrichtlinie': '/datenschutz',
     '/geschaftsbedingungen': '/agb',
   };
@@ -1064,7 +1016,14 @@ function App() {
   const pageMeta = meta[canonicalPath] || ['Seite nicht gefunden | Seehafen Immobilien', 'Die gewünschte Seite wurde nicht gefunden.'];
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const sectionId = window.location.hash.slice(1);
+    if (sectionId) {
+      window.requestAnimationFrame(() => {
+        document.getElementById(sectionId)?.scrollIntoView();
+      });
+    } else {
+      window.scrollTo(0, 0);
+    }
     document.title = pageMeta[0];
     const setMeta = (keyType, key, value) => {
       let element = document.querySelector(`meta[${keyType}="${key}"]`);
@@ -1093,9 +1052,6 @@ function App() {
   const pages = {
     '/': <Home />,
     '/firma': <CompanyOverview />,
-    '/uber-uns': <About />,
-    '/team': <TeamPage />,
-    '/werte': <ValuesPage />,
     '/dienstleistungen': <Services />,
     '/dienstleistungen/immobilienverkauf': <ServiceDetail service={primaryServices[0]} />,
     '/dienstleistungen/immobilienbewertung': <ServiceDetail service={primaryServices[1]} />,
