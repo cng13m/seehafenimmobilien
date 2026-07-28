@@ -143,6 +143,41 @@ const offerShowcaseItems = [
   },
 ];
 
+const currentListings = [
+  {
+    title: '4-Zimmer-Wohnung in Schaffhausen',
+    address: 'Bachstrasse 40, 8200 Schaffhausen',
+    price: 'CHF 1’840.–',
+    rooms: '4 Zimmer',
+    area: '95 m²',
+    href: 'https://www.homegate.ch/mieten/4002880992',
+  },
+  {
+    title: '3-Zimmer-Wohnung in Au',
+    address: 'Marktstrasse 7, 9435 Au',
+    price: 'CHF 1’530.–',
+    rooms: '3 Zimmer',
+    area: '75 m²',
+    href: 'https://www.homegate.ch/mieten/4002880956',
+  },
+  {
+    title: '3-Zimmer-Wohnung in Staad',
+    address: 'Hafen 1, 9422 Staad',
+    price: 'CHF 1’286.–',
+    rooms: '3 Zimmer',
+    area: '50 m²',
+    href: 'https://www.homegate.ch/mieten/4002880541',
+  },
+  {
+    title: '4-Zimmer-Wohnung in Rheineck',
+    address: 'Feldlistrasse 4, 9424 Rheineck',
+    price: 'CHF 1’350.–',
+    rooms: '4 Zimmer',
+    area: '97 m²',
+    href: 'https://www.homegate.ch/mieten/4002880507',
+  },
+];
+
 const soldReferences = [
   ['Mehrfamilienhaus', 'Hägglingen AG', 'Verkauft', '6 Wohnungen', '/assets/references/sale-haegglingen-6.jpg'],
   ['Wohnportfolio', 'Olten SO', 'Verkauft', '24 Wohnungen', '/assets/references/sale-olten-24.jpg'],
@@ -785,12 +820,46 @@ function References() {
 }
 
 function Listings() {
+  const profileUrl = 'https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag';
+
   return (
     <>
       <PageHero label="Immobilien" title="Aktuelle Immobilien." text="Entdecken Sie unsere laufend aktualisierten Kauf-, Miet- und Erstvermietungsangebote auf dem offiziellen Anbieterprofil." image="/assets/property-3.jpg" />
       <section className="offers-page">
         <div className="content">
-          <OfferShowcase detailed />
+          <div className="current-listings-heading">
+            <div>
+              <span className="kicker">Aktuell verfügbar</span>
+              <h2>Unsere Mietangebote.</h2>
+              <p>Vier aktuell publizierte Immobilien von Seehafen & Partner.</p>
+            </div>
+            <a className="text-link" href={profileUrl} target="_blank" rel="noreferrer">
+              Homegate-Profil <ExternalLink aria-hidden="true" />
+            </a>
+          </div>
+
+          <div className="current-listing-grid">
+            {currentListings.map((listing, index) => (
+              <article className="current-listing-card" key={listing.href}>
+                <div className="current-listing-topline">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <span>Mieten</span>
+                </div>
+                <h2>{listing.title}</h2>
+                <p className="current-listing-address"><MapPin aria-hidden="true" /> {listing.address}</p>
+                <div className="current-listing-facts">
+                  <span><Building2 aria-hidden="true" /> {listing.rooms}</span>
+                  <span><Ruler aria-hidden="true" /> {listing.area}</span>
+                </div>
+                <div className="current-listing-footer">
+                  <strong>{listing.price}<small>pro Monat</small></strong>
+                  <a href={listing.href} target="_blank" rel="noreferrer">
+                    Auf Homegate ansehen <ExternalLink aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
       <CTA />

@@ -682,6 +682,140 @@ div {
   background: #e9ecea;
 }
 
+.current-listings-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 44px;
+  gap: 36px;
+}
+
+.current-listings-heading h2 {
+  margin: 10px 0 12px;
+  font-size: clamp(38px, 4vw, 54px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+}
+
+.current-listings-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.current-listing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.current-listing-card {
+  display: flex;
+  min-height: 390px;
+  padding: 34px;
+  background: #fff;
+  border-top: 2px solid var(--green-800);
+  flex-direction: column;
+}
+
+.current-listing-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  color: var(--green-800);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.current-listing-card > h2 {
+  max-width: 480px;
+  margin: 0 0 16px;
+  font-size: clamp(27px, 2.7vw, 37px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.current-listing-address {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.current-listing-address svg,
+.current-listing-facts svg {
+  width: 17px;
+  height: 17px;
+  color: var(--green-800);
+  flex: 0 0 auto;
+}
+
+.current-listing-facts {
+  display: flex;
+  margin-top: 28px;
+  gap: 24px;
+}
+
+.current-listing-facts span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.current-listing-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 24px;
+  gap: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.current-listing-footer strong {
+  color: var(--green-950);
+  font-size: 22px;
+  font-weight: 650;
+}
+
+.current-listing-footer strong small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.current-listing-footer > a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--green-800);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.current-listing-footer > a:hover {
+  color: var(--green-950);
+}
+
+.current-listing-footer svg {
+  width: 17px;
+  height: 17px;
+}
+
 .offer-showcase-heading {
   display: flex;
   align-items: flex-end;
@@ -2341,6 +2475,30 @@ div {
   .reference-tile-body {
     min-height: 210px;
     padding: 24px;
+  }
+
+  .current-listings-heading {
+    align-items: flex-start;
+    margin-bottom: 34px;
+    flex-direction: column;
+  }
+
+  .current-listing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .current-listing-card {
+    min-height: 360px;
+    padding: 26px;
+  }
+
+  .current-listing-topline {
+    margin-bottom: 38px;
+  }
+
+  .current-listing-footer {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .page-hero {
