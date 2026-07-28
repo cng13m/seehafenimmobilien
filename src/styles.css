@@ -11,6 +11,8 @@
   --muted: #5b6861;
   --line: #d8dfda;
   --shadow: 0 18px 48px rgba(0, 38, 25, 0.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
   --content: 1220px;
   --gutter: 64px;
 }
@@ -2082,6 +2084,45 @@ div {
 .not-found p {
   margin: 0 0 26px;
   color: var(--muted);
+}
+
+/* Subtle shared corner treatment */
+.skip-link,
+.button,
+.header-cta,
+.nav-toggle,
+.offer-showcase-controls button,
+.form-fields input,
+.form-fields select,
+.form-fields textarea {
+  border-radius: var(--radius-sm);
+}
+
+.dropdown-panel,
+.offer-showcase-image > span {
+  border-radius: var(--radius-sm);
+}
+
+.hero,
+.page-hero-media,
+.home-service-card,
+.offer-showcase-stage,
+.reference-tile,
+.overview-link-card,
+.primary-service-card,
+.secondary-service-grid article,
+.service-detail-visual > img,
+.current-listing-card,
+.contact-direct-panel,
+.contact-locations article,
+.contact-form,
+.legal-content {
+  border-radius: var(--radius-md);
+}
+
+.offer-showcase-stage,
+.secondary-service-grid article {
+  overflow: hidden;
 }
 
 @media (max-width: 1120px) {
