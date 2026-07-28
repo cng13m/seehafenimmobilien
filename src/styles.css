@@ -2125,6 +2125,29 @@ div {
   overflow: hidden;
 }
 
+/* Scroll reveal */
+.scroll-reveal {
+  opacity: 0;
+  translate: 0 26px;
+  transition:
+    opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    scale 0.82s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, translate;
+}
+
+.scroll-reveal-media {
+  scale: 0.985;
+}
+
+.scroll-reveal.is-revealed {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  will-change: auto;
+}
+
 @media (max-width: 1120px) {
   :root {
     --gutter: 48px;

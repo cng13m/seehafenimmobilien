@@ -1109,6 +1109,111 @@ const meta = {
   '/agb': ['AGB | Seehafen Immobilien', 'Allgemeine Geschäftsbedingungen der Seehafen & Partner Immobilien AG.'],
 };
 
+const revealSelector = [
+  '.hero-content',
+  '.home-heading',
+  '.home-service-card',
+  '.split-heading',
+  '.section-heading',
+  '.process-grid article',
+  '.offer-showcase-heading',
+  '.offer-showcase-stage',
+  '.reference-tile',
+  '.page-hero-copy',
+  '.page-hero-media',
+  '.overview-links-heading',
+  '.overview-link-card',
+  '.company-about-copy',
+  '.company-about-aside',
+  '.company-section-heading',
+  '.team-grid article',
+  '.company-values-column',
+  '.primary-service-card',
+  '.secondary-service-grid article',
+  '.service-detail-grid > div',
+  '.reference-archive-intro',
+  '.current-listings-heading',
+  '.current-listing-card',
+  '.contact-intro-copy',
+  '.contact-direct-panel',
+  '.contact-locations',
+  '.contact-form',
+  '.legal-content',
+  '.contact-strip .content > *',
+  '.footer-main > *',
+  '.footer-bottom',
+].join(',');
+
+const revealMediaSelector = [
+  '.page-hero-media',
+  '.home-service-card',
+  '.offer-showcase-stage',
+  '.reference-tile',
+  '.overview-link-card',
+  '.primary-service-card',
+  '.secondary-service-grid article',
+].join(',');
+
+function useScrollReveal(pageKey) {
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const registered = new Set();
+    let observer;
+
+    const register = (element) => {
+      if (registered.has(element)) return;
+      registered.add(element);
+      element.classList.add('scroll-reveal');
+
+      if (element.matches(revealMediaSelector)) {
+        element.classList.add('scroll-reveal-media');
+      }
+
+      const siblings = Array.from(element.parentElement?.children || [])
+        .filter((sibling) => sibling.matches?.(revealSelector));
+      const siblingIndex = siblings.indexOf(element);
+      element.style.setProperty('--reveal-delay', `${Math.min(Math.max(siblingIndex, 0), 4) * 70}ms`);
+
+      if (reducedMotion || !observer) {
+        element.classList.add('is-revealed');
+      } else {
+        observer.observe(element);
+      }
+    };
+
+    if (!reducedMotion && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        rootMargin: '0px 0px -8% 0px',
+        threshold: 0.12,
+      });
+    }
+
+    const scan = () => document.querySelectorAll(revealSelector).forEach(register);
+    scan();
+
+    const mutationObserver = new MutationObserver(scan);
+    mutationObserver.observe(document.getElementById('main-content'), {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer?.disconnect();
+      mutationObserver.disconnect();
+      registered.forEach((element) => {
+        element.classList.remove('scroll-reveal', 'scroll-reveal-media', 'is-revealed');
+        element.style.removeProperty('--reveal-delay');
+      });
+    };
+  }, [pageKey]);
+}
+
 function App() {
   const path = window.location.pathname.replace(/\/$/, '') || '/';
   const aliases = {
@@ -1119,6 +1224,7 @@ function App() {
     '/geschaftsbedingungen': '/agb',
   };
   const canonicalPath = aliases[path] || path;
+  useScrollReveal(canonicalPath);
   const pageMeta = meta[canonicalPath] || ['Seite nicht gefunden | Seehafen Immobilien', 'Die gewünschte Seite wurde nicht gefunden.'];
 
   useEffect(() => {
