@@ -809,7 +809,11 @@ function References() {
 
   return (
     <>
-      <PageHero label="Referenzen" title="Erfolgreiche Projekte." text="Erfolgreiche Projekte, die für Qualität, Vertrauen und Erfahrung stehen – vom Verkauf über die Vermietung bis zur langfristigen Bewirtschaftung." image="/assets/references/sale-haegglingen-6.jpg" />
+      <section className="references-title">
+        <div className="content">
+          <h1>Referenzen</h1>
+        </div>
+      </section>
       <section className="reference-archive">
         <div className="content">
           <div className="reference-archive-grid" id="reference-grid">
@@ -1131,6 +1135,7 @@ const revealSelector = [
   '.primary-service-card',
   '.secondary-service-grid article',
   '.service-detail-grid > div',
+  '.references-title h1',
   '.reference-archive-intro',
   '.current-listings-heading',
   '.current-listing-card',
