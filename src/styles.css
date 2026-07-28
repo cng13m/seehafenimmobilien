@@ -1071,6 +1071,22 @@ div {
   align-items: center;
 }
 
+.page-hero-grid-text-only {
+  display: block;
+}
+
+.page-hero-grid-text-only .page-hero-copy {
+  max-width: 900px;
+}
+
+.page-hero-grid-text-only h1 {
+  max-width: 850px;
+}
+
+.page-hero-grid-text-only .page-hero-copy p {
+  max-width: 720px;
+}
+
 .page-hero h1 {
   max-width: 650px;
   margin: 16px 0 28px;
@@ -1176,14 +1192,15 @@ div {
 }
 
 .company-about-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(54px, 7vw, 104px);
-  align-items: center;
+  display: block;
+}
+
+.company-about-copy {
+  max-width: 960px;
 }
 
 .company-about-copy h1 {
-  max-width: 650px;
+  max-width: 850px;
   margin: 16px 0 28px;
   font-size: clamp(48px, 5vw, 68px);
   font-weight: 600;
@@ -1192,7 +1209,7 @@ div {
 }
 
 .company-about-lead {
-  max-width: 620px;
+  max-width: 720px;
   margin: 0;
   color: var(--green-800);
   font-size: 19px;
@@ -1202,7 +1219,7 @@ div {
 .company-about-text {
   display: grid;
   gap: 12px;
-  max-width: 620px;
+  max-width: 720px;
   margin-top: 32px;
   padding-top: 28px;
   border-top: 1px solid var(--line);
@@ -1213,18 +1230,6 @@ div {
   color: var(--muted);
   font-size: 15px;
   line-height: 1.72;
-}
-
-.company-about-media {
-  height: clamp(480px, 49vw, 650px);
-  overflow: hidden;
-  background: var(--cream);
-}
-
-.company-about-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .company-team {
@@ -2259,10 +2264,6 @@ div {
     max-width: 720px;
   }
 
-  .company-about-media {
-    height: 560px;
-  }
-
   .quote-section .content {
     align-items: flex-start;
     flex-direction: column;
@@ -2551,10 +2552,6 @@ div {
   .company-about-text {
     margin-top: 24px;
     padding-top: 22px;
-  }
-
-  .company-about-media {
-    height: 390px;
   }
 
   .company-section-heading {

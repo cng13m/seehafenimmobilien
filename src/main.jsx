@@ -377,19 +377,21 @@ function PageHero({ label, title, text, image }) {
     Kontakt: '/assets/team-2.jpg',
     Rechtliches: '/assets/property-hero.jpg',
   };
-  const heroImage = image || defaultImages[label] || '/assets/property-hero.jpg';
+  const heroImage = image === false ? null : image || defaultImages[label] || '/assets/property-hero.jpg';
 
   return (
     <section className="page-hero">
-      <div className="content page-hero-grid">
+      <div className={`content page-hero-grid${heroImage ? '' : ' page-hero-grid-text-only'}`}>
         <div className="page-hero-copy">
           <span className="kicker">{label}</span>
           <h1>{title}</h1>
           <p>{text}</p>
         </div>
-        <div className="page-hero-media">
-          <img src={heroImage} alt="" />
-        </div>
+        {heroImage && (
+          <div className="page-hero-media">
+            <img src={heroImage} alt="" />
+          </div>
+        )}
       </div>
     </section>
   );
@@ -640,9 +642,6 @@ function CompanyOverview() {
               <p>Unser Anspruch ist, Immobilien nicht nur zu verwalten oder zu vermitteln, sondern Werte nachhaltig zu sichern und weiterzuentwickeln.</p>
             </div>
           </div>
-          <div className="company-about-media">
-            <img src="/assets/about.jpg" alt="Das Team von Seehafen & Partner" />
-          </div>
         </div>
       </section>
 
@@ -775,7 +774,7 @@ function ServiceDetail({ service }) {
 function OffersOverview() {
   return (
     <>
-      <PageHero label="Angebote" title="Immobilien im Überblick." text="Entdecken Sie aktuelle Kauf- und Mietangebote oder werfen Sie einen Blick auf erfolgreich begleitete Projekte." image="/assets/property-1.jpg" />
+      <PageHero label="Angebote" title="Immobilien im Überblick." text="Entdecken Sie aktuelle Kauf- und Mietangebote oder werfen Sie einen Blick auf erfolgreich begleitete Projekte." image={false} />
       <OverviewLinks items={[
         { title: 'Aktuelle Angebote', text: 'Verfügbare Kauf- und Mietobjekte auf unserem offiziellen Anbieterprofil.', image: '/assets/property-3.jpg', href: '/immobilien' },
         { title: 'Referenzen', text: 'Eine Auswahl verkaufter, vermieteter und verwalteter Immobilien.', image: '/assets/property-2.jpg', href: '/referenzen' },
