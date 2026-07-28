@@ -9,6 +9,10 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === '/immobilien') {
+      return Response.redirect('https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag', 301);
+    }
+
     if (url.pathname === '/api/contact' && request.method === 'POST') {
       try {
         const data = await request.json();

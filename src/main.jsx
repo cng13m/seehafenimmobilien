@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
+const homegateProfileUrl = 'https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag';
+
 const primaryServices = [
   {
     slug: 'immobilienverkauf',
@@ -143,41 +145,6 @@ const offerShowcaseItems = [
   },
 ];
 
-const currentListings = [
-  {
-    title: '4-Zimmer-Wohnung in Schaffhausen',
-    address: 'Bachstrasse 40, 8200 Schaffhausen',
-    price: 'CHF 1’840.–',
-    rooms: '4 Zimmer',
-    area: '95 m²',
-    href: 'https://www.homegate.ch/mieten/4002880992',
-  },
-  {
-    title: '3-Zimmer-Wohnung in Au',
-    address: 'Marktstrasse 7, 9435 Au',
-    price: 'CHF 1’530.–',
-    rooms: '3 Zimmer',
-    area: '75 m²',
-    href: 'https://www.homegate.ch/mieten/4002880956',
-  },
-  {
-    title: '3-Zimmer-Wohnung in Staad',
-    address: 'Hafen 1, 9422 Staad',
-    price: 'CHF 1’286.–',
-    rooms: '3 Zimmer',
-    area: '50 m²',
-    href: 'https://www.homegate.ch/mieten/4002880541',
-  },
-  {
-    title: '4-Zimmer-Wohnung in Rheineck',
-    address: 'Feldlistrasse 4, 9424 Rheineck',
-    price: 'CHF 1’350.–',
-    rooms: '4 Zimmer',
-    area: '97 m²',
-    href: 'https://www.homegate.ch/mieten/4002880507',
-  },
-];
-
 const soldReferences = [
   ['Mehrfamilienhaus', 'Hägglingen AG', 'Verkauft', '6 Wohnungen', '/assets/references/sale-haegglingen-6.jpg'],
   ['Wohnportfolio', 'Olten SO', 'Verkauft', '24 Wohnungen', '/assets/references/sale-olten-24.jpg'],
@@ -244,7 +211,7 @@ const navGroups = [
   {
     label: 'Angebote',
     href: '/angebote',
-    items: [['Aktuelle Angebote', '/immobilien'], ['Referenzen', '/referenzen']],
+    items: [['Aktuelle Angebote', homegateProfileUrl], ['Referenzen', '/referenzen']],
   },
 ];
 
@@ -275,9 +242,21 @@ function NavDropdown({ group, currentPath, open, onToggle, onNavigate }) {
         </button>
       </div>
       <div className="dropdown-panel" id={panelId}>
-        {group.items.map(([name, href]) => (
-          <a href={href} onClick={onNavigate} key={name} aria-current={currentPath === href ? 'page' : undefined}>{name}</a>
-        ))}
+        {group.items.map(([name, href]) => {
+          const external = href.startsWith('http');
+          return (
+            <a
+              href={href}
+              onClick={onNavigate}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noreferrer' : undefined}
+              key={name}
+              aria-current={currentPath === href ? 'page' : undefined}
+            >
+              {name}
+            </a>
+          );
+        })}
       </div>
     </div>
   );
@@ -459,16 +438,25 @@ function OverviewLinks({ items, label, title, text }) {
           <p>{text}</p>
         </div>
         <div className="overview-link-grid">
-          {items.map(({ title: itemTitle, text: itemText, image, href }) => (
-            <a href={href} className="overview-link-card" key={itemTitle}>
-              <img src={image} alt="" loading="lazy" />
-              <div>
-                <h2>{itemTitle}</h2>
-                <p>{itemText}</p>
-                <span>Entdecken <ArrowRight aria-hidden="true" /></span>
-              </div>
-            </a>
-          ))}
+          {items.map(({ title: itemTitle, text: itemText, image, href }) => {
+            const external = href.startsWith('http');
+            return (
+              <a
+                href={href}
+                className="overview-link-card"
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noreferrer' : undefined}
+                key={itemTitle}
+              >
+                <img src={image} alt="" loading="lazy" />
+                <div>
+                  <h2>{itemTitle}</h2>
+                  <p>{itemText}</p>
+                  <span>{external ? 'Auf Homegate' : 'Entdecken'} {external ? <ExternalLink aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}</span>
+                </div>
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -500,13 +488,9 @@ function ProcessSection({ compact = false }) {
   );
 }
 
-function OfferShowcase({ detailed = false }) {
-  const requestedOffer = detailed ? new URLSearchParams(window.location.search).get('angebot') : null;
-  const requestedIndex = offerShowcaseItems.findIndex((offer) => offer.slug === requestedOffer);
-  const [activeIndex, setActiveIndex] = useState(requestedIndex >= 0 ? requestedIndex : 0);
+function OfferShowcase() {
+  const [activeIndex, setActiveIndex] = useState(0);
   const offer = offerShowcaseItems[activeIndex];
-  const profileUrl = 'https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag';
-  const detailHref = detailed ? profileUrl : `/immobilien?angebot=${offer.slug}`;
 
   useEffect(() => {
     offerShowcaseItems.forEach(({ image }) => {
@@ -532,10 +516,11 @@ function OfferShowcase({ detailed = false }) {
         </div>
         <a
           className="text-link"
-          href={detailed ? profileUrl : '/immobilien'}
-          {...(detailed ? { target: '_blank', rel: 'noreferrer' } : {})}
+          href={homegateProfileUrl}
+          target="_blank"
+          rel="noreferrer"
         >
-          Alle Angebote {detailed ? <ExternalLink aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+          Alle Angebote <ExternalLink aria-hidden="true" />
         </a>
       </div>
 
@@ -555,10 +540,11 @@ function OfferShowcase({ detailed = false }) {
           </div>
           <a
             className="offer-showcase-detail"
-            href={detailHref}
-            {...(detailed ? { target: '_blank', rel: 'noreferrer' } : {})}
+            href={homegateProfileUrl}
+            target="_blank"
+            rel="noreferrer"
           >
-            {detailed ? 'Angebote öffnen' : 'Details'} {detailed ? <ExternalLink aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+            Auf Homegate ansehen <ExternalLink aria-hidden="true" />
           </a>
         </article>
       </div>
@@ -570,10 +556,11 @@ function OfferShowcase({ detailed = false }) {
         </div>
         <a
           className="button button-solid"
-          href={detailed ? profileUrl : '/immobilien'}
-          {...(detailed ? { target: '_blank', rel: 'noreferrer' } : {})}
+          href={homegateProfileUrl}
+          target="_blank"
+          rel="noreferrer"
         >
-          Alle Angebote {detailed && <ExternalLink aria-hidden="true" />}
+          Alle Angebote <ExternalLink aria-hidden="true" />
         </a>
       </div>
     </div>
@@ -815,7 +802,7 @@ function OffersOverview() {
         title="Immobilien im Überblick."
         text="Entdecken Sie aktuelle Kauf- und Mietangebote oder werfen Sie einen Blick auf erfolgreich begleitete Projekte."
         items={[
-          { title: 'Aktuelle Angebote', text: 'Verfügbare Kauf- und Mietobjekte auf unserem offiziellen Anbieterprofil.', image: '/assets/property-3.jpg', href: '/immobilien' },
+          { title: 'Aktuelle Angebote', text: 'Verfügbare Kauf- und Mietobjekte auf unserem offiziellen Anbieterprofil.', image: '/assets/property-3.jpg', href: homegateProfileUrl },
           { title: 'Referenzen', text: 'Eine Auswahl verkaufter, vermieteter und verwalteter Immobilien.', image: '/assets/property-2.jpg', href: '/referenzen' },
         ]}
       />
@@ -855,54 +842,6 @@ function References() {
               </button>
             </div>
           )}
-        </div>
-      </section>
-      <CTA />
-    </>
-  );
-}
-
-function Listings() {
-  const profileUrl = 'https://www.homegate.ch/anbieter/h475138/seehafen-partner-immobilien-ag';
-
-  return (
-    <>
-      <PageHero label="Immobilien" title="Aktuelle Immobilien." text="Entdecken Sie unsere laufend aktualisierten Kauf-, Miet- und Erstvermietungsangebote auf dem offiziellen Anbieterprofil." image={false} />
-      <section className="offers-page">
-        <div className="content">
-          <div className="current-listings-heading">
-            <div>
-              <span className="kicker">Aktuell verfügbar</span>
-              <h2>Unsere Mietangebote.</h2>
-              <p>Vier aktuell publizierte Immobilien von Seehafen & Partner.</p>
-            </div>
-            <a className="text-link" href={profileUrl} target="_blank" rel="noreferrer">
-              Homegate-Profil <ExternalLink aria-hidden="true" />
-            </a>
-          </div>
-
-          <div className="current-listing-grid">
-            {currentListings.map((listing, index) => (
-              <article className="current-listing-card" key={listing.href}>
-                <div className="current-listing-topline">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <span>Mieten</span>
-                </div>
-                <h2>{listing.title}</h2>
-                <p className="current-listing-address"><MapPin aria-hidden="true" /> {listing.address}</p>
-                <div className="current-listing-facts">
-                  <span><Building2 aria-hidden="true" /> {listing.rooms}</span>
-                  <span><Ruler aria-hidden="true" /> {listing.area}</span>
-                </div>
-                <div className="current-listing-footer">
-                  <strong>{listing.price}<small>pro Monat</small></strong>
-                  <a href={listing.href} target="_blank" rel="noreferrer">
-                    Auf Homegate ansehen <ExternalLink aria-hidden="true" />
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
         </div>
       </section>
       <CTA />
@@ -1126,7 +1065,6 @@ const meta = {
   '/dienstleistungen/stockwerkeigentum': ['Stockwerkeigentum | Seehafen Immobilien', 'Strukturierte und transparente Verwaltung von Stockwerkeigentum.'],
   '/dienstleistungen/mietliegenschaften': ['Mietliegenschaften | Seehafen Immobilien', 'Persönliche und nachhaltige Bewirtschaftung von Mietliegenschaften.'],
   '/angebote': ['Angebote | Seehafen Immobilien', 'Aktuelle Immobilienangebote und erfolgreich begleitete Referenzprojekte.'],
-  '/immobilien': ['Aktuelle Immobilien | Seehafen Immobilien', 'Aktuelle Kauf- und Mietangebote von Seehafen & Partner Immobilien auf Homegate.'],
   '/referenzen': ['Referenzen | Seehafen Immobilien', 'Ausgewählte erfolgreich verkaufte, vermietete und verwaltete Immobilienprojekte.'],
   '/kontakt': ['Kontakt | Seehafen Immobilien', 'Kontaktieren Sie Seehafen & Partner in Schwyz oder Wohlen für ein kostenloses Erstgespräch.'],
   '/impressum': ['Impressum | Seehafen Immobilien', 'Impressum und Unternehmensinformationen der Seehafen & Partner Immobilien AG.'],
@@ -1158,8 +1096,6 @@ const revealSelector = [
   '.service-detail-grid > div',
   '.references-title h1',
   '.reference-archive-intro',
-  '.current-listings-heading',
-  '.current-listing-card',
   '.contact-intro-copy',
   '.contact-direct-panel',
   '.contact-locations',
@@ -1296,7 +1232,6 @@ function App() {
     '/dienstleistungen/stockwerkeigentum': <ServiceDetail service={primaryServices[2]} />,
     '/dienstleistungen/mietliegenschaften': <ServiceDetail service={primaryServices[3]} />,
     '/angebote': <OffersOverview />,
-    '/immobilien': <Listings />,
     '/referenzen': <References />,
     '/kontakt': <Contact />,
     '/impressum': <Impressum />,
