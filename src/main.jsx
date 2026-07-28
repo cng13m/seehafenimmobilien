@@ -256,26 +256,27 @@ function Logo() {
   );
 }
 
-function NavDropdown({ group, currentPath }) {
-  const [open, setOpen] = useState(false);
+function NavDropdown({ group, currentPath, open, onToggle, onNavigate }) {
   const isActive = currentPath === group.href || group.items.some(([, href]) => currentPath === href);
+  const panelId = `nav-${group.label.toLowerCase()}-panel`;
 
   return (
     <div className={`nav-dropdown${open ? ' is-open' : ''}${isActive ? ' is-active' : ''}`}>
       <div className="nav-dropdown-trigger">
-        <a href={group.href} aria-current={currentPath === group.href ? 'page' : undefined}>{group.label}</a>
+        <a href={group.href} onClick={onNavigate} aria-current={currentPath === group.href ? 'page' : undefined}>{group.label}</a>
         <button
           type="button"
-          onClick={() => setOpen((value) => !value)}
+          onClick={onToggle}
           aria-expanded={open}
+          aria-controls={panelId}
           aria-label={`${group.label} Untermenü ${open ? 'schliessen' : 'öffnen'}`}
         >
           <ChevronDown aria-hidden="true" />
         </button>
       </div>
-      <div className="dropdown-panel">
+      <div className="dropdown-panel" id={panelId}>
         {group.items.map(([name, href]) => (
-          <a href={href} key={name} aria-current={currentPath === href ? 'page' : undefined}>{name}</a>
+          <a href={href} onClick={onNavigate} key={name} aria-current={currentPath === href ? 'page' : undefined}>{name}</a>
         ))}
       </div>
     </div>
@@ -284,10 +285,16 @@ function NavDropdown({ group, currentPath }) {
 
 function Header({ currentPath }) {
   const [open, setOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const closeMenu = () => {
+    setOpen(false);
+    setOpenDropdown(null);
+  };
 
   useEffect(() => {
     const closeOnEscape = (event) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') closeMenu();
     };
     window.addEventListener('keydown', closeOnEscape);
     document.body.classList.toggle('menu-open', open);
@@ -302,13 +309,27 @@ function Header({ currentPath }) {
       <div className="nav-shell">
         <Logo />
         <nav id="main-navigation" className={`main-nav${open ? ' is-open' : ''}`} aria-label="Hauptnavigation">
-          {navGroups.map((group) => <NavDropdown group={group} currentPath={currentPath} key={group.label} />)}
-          <a className="header-cta" href="/kontakt">Kostenlose Bewertung <ArrowRight aria-hidden="true" /></a>
+          {navGroups.map((group) => (
+            <NavDropdown
+              group={group}
+              currentPath={currentPath}
+              open={openDropdown === group.label}
+              onToggle={() => setOpenDropdown((value) => value === group.label ? null : group.label)}
+              onNavigate={closeMenu}
+              key={group.label}
+            />
+          ))}
+          <a className="header-cta" href="/kontakt" onClick={closeMenu}>Kostenlose Bewertung <ArrowRight aria-hidden="true" /></a>
         </nav>
         <button
           className="nav-toggle"
           type="button"
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => {
+            setOpen((value) => {
+              if (value) setOpenDropdown(null);
+              return !value;
+            });
+          }}
           aria-expanded={open}
           aria-controls="main-navigation"
           aria-label={open ? 'Menü schliessen' : 'Menü öffnen'}
@@ -846,7 +867,7 @@ function Listings() {
 
   return (
     <>
-      <PageHero label="Immobilien" title="Aktuelle Immobilien." text="Entdecken Sie unsere laufend aktualisierten Kauf-, Miet- und Erstvermietungsangebote auf dem offiziellen Anbieterprofil." image="/assets/property-3.jpg" />
+      <PageHero label="Immobilien" title="Aktuelle Immobilien." text="Entdecken Sie unsere laufend aktualisierten Kauf-, Miet- und Erstvermietungsangebote auf dem offiziellen Anbieterprofil." image={false} />
       <section className="offers-page">
         <div className="content">
           <div className="current-listings-heading">
