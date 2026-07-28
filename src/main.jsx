@@ -426,20 +426,29 @@ function PrimaryServiceCard({ service }) {
   );
 }
 
-function OverviewLinks({ items }) {
+function OverviewLinks({ items, label, title, text }) {
   return (
     <section className="overview-links">
-      <div className="content overview-link-grid">
-        {items.map(({ title, text, image, href }) => (
-          <a href={href} className="overview-link-card" key={title}>
-            <img src={image} alt="" loading="lazy" />
-            <div>
-              <h2>{title}</h2>
-              <p>{text}</p>
-              <span>Entdecken <ArrowRight aria-hidden="true" /></span>
-            </div>
-          </a>
-        ))}
+      <div className="content">
+        <div className="overview-links-heading">
+          <div>
+            <span className="kicker">{label}</span>
+            <h1>{title}</h1>
+          </div>
+          <p>{text}</p>
+        </div>
+        <div className="overview-link-grid">
+          {items.map(({ title: itemTitle, text: itemText, image, href }) => (
+            <a href={href} className="overview-link-card" key={itemTitle}>
+              <img src={image} alt="" loading="lazy" />
+              <div>
+                <h2>{itemTitle}</h2>
+                <p>{itemText}</p>
+                <span>Entdecken <ArrowRight aria-hidden="true" /></span>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -637,10 +646,16 @@ function CompanyOverview() {
             <span className="kicker">Über uns</span>
             <h1>Drei Persönlichkeiten.<br />Eine Leidenschaft.</h1>
             <p className="company-about-lead">Wir betreuen Immobilien mit Engagement, Fachwissen und Weitblick – persönlich, effizient und immer im Interesse unserer Kundschaft.</p>
+          </div>
+          <div className="company-about-aside">
             <div className="company-about-text">
               <p>Als unabhängiges Immobilienunternehmen hören wir zu, denken voraus und schaffen klare Lösungen.</p>
               <p>Unser Anspruch ist, Immobilien nicht nur zu verwalten oder zu vermitteln, sondern Werte nachhaltig zu sichern und weiterzuentwickeln.</p>
             </div>
+            <nav className="company-about-nav" aria-label="Firma entdecken">
+              <a href="#team"><span>01</span><strong>Unser Team</strong><ArrowRight aria-hidden="true" /></a>
+              <a href="#werte"><span>02</span><strong>Werte & Arbeitsweise</strong><ArrowRight aria-hidden="true" /></a>
+            </nav>
           </div>
         </div>
       </section>
@@ -774,11 +789,15 @@ function ServiceDetail({ service }) {
 function OffersOverview() {
   return (
     <>
-      <PageHero label="Angebote" title="Immobilien im Überblick." text="Entdecken Sie aktuelle Kauf- und Mietangebote oder werfen Sie einen Blick auf erfolgreich begleitete Projekte." image={false} />
-      <OverviewLinks items={[
-        { title: 'Aktuelle Angebote', text: 'Verfügbare Kauf- und Mietobjekte auf unserem offiziellen Anbieterprofil.', image: '/assets/property-3.jpg', href: '/immobilien' },
-        { title: 'Referenzen', text: 'Eine Auswahl verkaufter, vermieteter und verwalteter Immobilien.', image: '/assets/property-2.jpg', href: '/referenzen' },
-      ]} />
+      <OverviewLinks
+        label="Angebote"
+        title="Immobilien im Überblick."
+        text="Entdecken Sie aktuelle Kauf- und Mietangebote oder werfen Sie einen Blick auf erfolgreich begleitete Projekte."
+        items={[
+          { title: 'Aktuelle Angebote', text: 'Verfügbare Kauf- und Mietobjekte auf unserem offiziellen Anbieterprofil.', image: '/assets/property-3.jpg', href: '/immobilien' },
+          { title: 'Referenzen', text: 'Eine Auswahl verkaufter, vermieteter und verwalteter Immobilien.', image: '/assets/property-2.jpg', href: '/referenzen' },
+        ]}
+      />
       <CTA />
     </>
   );
