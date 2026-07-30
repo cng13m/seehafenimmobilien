@@ -581,7 +581,7 @@ function Home() {
   return (
     <>
       <section className="hero">
-        <img src="/assets/hero-original.jpg" alt="Moderne Immobilie mit Pool und Weitblick" />
+        <img src="/assets/hero-consultation.png" alt="Seehafen Immobilienberatung vor einem modernen Wohnhaus" />
         <div className="hero-overlay" />
         <div className="content hero-content">
           <p className="hero-eyebrow">Langfristig. Persönlich. Verlässlich.</p>
